@@ -6,8 +6,10 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { ExternalLink, Tag, User, Package } from 'lucide-react';
 import { generateSlug } from '@/lib/slugify';
+import { convertPrice, convertToOopBuy, currencySymbols } from '@/lib/productUtils';
+import { trackBuyNowClick } from '@/lib/analytics';
 
-export default function ProductCard({ product, currency, convertPrice, convertToOopBuy }) {
+export default function ProductCard({ product, currency }) {
   const searchParams = useSearchParams();
   const productSlug = generateSlug(product.name, product._id);
   const [imageError, setImageError] = useState(false);
@@ -28,8 +30,8 @@ export default function ProductCard({ product, currency, convertPrice, convertTo
     }) || [];
   const firstImage = validImages[0] || null;
 
-  // Debug logging
-  if (product.name) {
+  // Debug logging (controlled by DEBUG_MODE)
+  if (typeof window !== 'undefined' && window.DEBUG_MODE && product.name) {
     console.log(`[ProductCard] ${product.name}:`, {
       totalImages: product.images?.length || 0,
       validImages: validImages.length,
@@ -37,20 +39,6 @@ export default function ProductCard({ product, currency, convertPrice, convertTo
       imageError
     });
   }
-
-  const currencySymbols = {
-    USD: '$',
-    GBP: '£',
-    EUR: '€',
-    NZD: 'NZ$',
-    AUD: 'A$',
-    CAD: 'C$',
-    MXN: '$',
-    BRL: 'R$',
-    KRW: '₩',
-    CNY: '¥',
-    PLN: 'zł',
-  };
 
   return (
     <div className="group relative bg-white rounded-xl sm:rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#FF186B]/30 flex flex-col h-full">
@@ -130,7 +118,7 @@ export default function ProductCard({ product, currency, convertPrice, convertTo
             <div className="flex flex-col">
               <span className="text-[10px] sm:text-xs text-gray-500 mb-0.5 sm:mb-1">Price</span>
               <span className="text-base sm:text-xl lg:text-2xl font-bold text-[#FF186B]">
-                {currencySymbols[currency]}{convertPrice(product.price)}
+                {currencySymbols[currency]}{convertPrice(product.price, currency)}
               </span>
             </div>
           </div>
@@ -144,7 +132,11 @@ export default function ProductCard({ product, currency, convertPrice, convertTo
             href={convertToOopBuy(product.id, product.store)}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              // Track the click in Google Analytics
+              trackBuyNowClick(product, 'product_card');
+            }}
             className="inline-flex items-center justify-center gap-1 sm:gap-2 w-full px-3 sm:px-4 lg:px-5 py-1.5 sm:py-2 lg:py-2.5 bg-gradient-to-r from-[#FF186B] to-pink-600 text-white rounded-lg sm:rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200 font-semibold text-xs sm:text-sm"
           >
             <span className="hidden sm:inline">Buy Now</span>

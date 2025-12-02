@@ -28,13 +28,33 @@ if [ ! -f "$SSH_KEY" ]; then
   exit 1
 fi
 
-# Step 1: Build project locally
-echo -e "${YELLOW}📦 Step 1: Building project locally...${NC}"
+# Step 1: Git commit and push
+echo -e "${YELLOW}🔄 Step 1: Committing and pushing to Git...${NC}"
+
+# Check if there are changes to commit
+if [[ -n $(git status -s) ]]; then
+  echo -e "${BLUE}📝 Changes detected, committing...${NC}"
+  git add .
+  TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+  git commit -m "Deploy: $TIMESTAMP
+
+🤖 Generated with Claude Code
+
+Co-Authored-By: Claude <noreply@anthropic.com>"
+  echo -e "${BLUE}📤 Pushing to remote...${NC}"
+  git push
+  echo -e "${GREEN}✅ Git push complete${NC}"
+else
+  echo -e "${BLUE}ℹ️  No changes to commit${NC}"
+fi
+
+# Step 2: Build project locally
+echo -e "${YELLOW}📦 Step 2: Building project locally...${NC}"
 npm run build
 echo -e "${GREEN}✅ Build complete${NC}"
 
-# Step 2: Prepare deployment files
-echo -e "${YELLOW}📋 Step 2: Preparing deployment files...${NC}"
+# Step 3: Prepare deployment files
+echo -e "${YELLOW}📋 Step 3: Preparing deployment files...${NC}"
 
 # Create temporary directory for deployment
 TEMP_DIR=$(mktemp -d)
@@ -61,8 +81,8 @@ fi
 
 echo -e "${GREEN}✅ Files prepared${NC}"
 
-# Step 3: Upload to server
-echo -e "${YELLOW}📤 Step 3: Uploading to server...${NC}"
+# Step 4: Upload to server
+echo -e "${YELLOW}📤 Step 4: Uploading to server...${NC}"
 
 # Create remote directory if it doesn't exist
 ssh -i "$SSH_KEY" root@"$SERVER_IP" "mkdir -p $REMOTE_DIR"
@@ -77,8 +97,8 @@ rm -rf $TEMP_DIR
 
 echo -e "${GREEN}✅ Upload complete${NC}"
 
-# Step 4: Setup and run on server
-echo -e "${YELLOW}🔧 Step 4: Setting up on server...${NC}"
+# Step 5: Setup and run on server
+echo -e "${YELLOW}🔧 Step 5: Setting up on server...${NC}"
 
 ssh -t -i "$SSH_KEY" root@"$SERVER_IP" <<'ENDSSH'
 set -e

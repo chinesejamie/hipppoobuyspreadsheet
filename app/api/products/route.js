@@ -3,8 +3,7 @@ import mongoose from 'mongoose';
 import Product from '@/models/Product';
 import connectToDatabase from '@/lib/mongodb';
 
-// Helper function CNY → USD
-const convertCnyToUsd = (cny) => (cny * 0.14).toFixed(2);
+// Price conversion removed - frontend handles all currency conversions
 
 export async function GET(request) {
   // 1) Connect to DB
@@ -15,7 +14,17 @@ export async function GET(request) {
   const creatorName = url.searchParams.get('creatorName');
   const category = url.searchParams.get('category');
   const page = Number(url.searchParams.get('page') ?? '1');
-  const limit = Number(url.searchParams.get('limit') ?? '100');
+
+  // Security: Enforce maximum limit of 100 to prevent crawler abuse
+  const requestedLimit = Number(url.searchParams.get('limit') ?? '100');
+  const MAX_LIMIT = 100;
+  const limit = Math.min(requestedLimit, MAX_LIMIT);
+
+  // Log suspicious requests trying to exceed limit
+  if (requestedLimit > MAX_LIMIT) {
+    console.warn(`[API Security] Blocked request with limit=${requestedLimit} from ${request.headers.get('x-forwarded-for') || 'unknown'}`);
+  }
+
   const now = new Date();
 
   // 2) Base Query
@@ -129,7 +138,7 @@ export async function GET(request) {
 
     const result = {
       ...p,
-      price: typeof p.price === 'number' ? convertCnyToUsd(p.price) : p.price,
+      price: p.price,
       mainImage: mainImageUrl,
       images: normalizedImages,
     };
@@ -165,7 +174,9 @@ export async function GET(request) {
     pagination: {
       page,
       limit,
-      hasMore: products.length === limit
+      maxLimit: MAX_LIMIT,
+      hasMore: products.length === limit,
+      note: requestedLimit > MAX_LIMIT ? 'Limit capped at maximum allowed value' : undefined
     }
   });
 }

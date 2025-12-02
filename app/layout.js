@@ -55,6 +55,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <script
+          dangerouslySetInnerHTML={{
+            __html: `window.DEBUG_MODE = ${process.env.DEBUG_MODE === 'true'};`
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({

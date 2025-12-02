@@ -1,10 +1,12 @@
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
-import { Tag, User, Store, ShoppingCart, Package, Info, Gift, Sparkles } from 'lucide-react';
+import { Tag, User, Store, Info, Gift, Sparkles } from 'lucide-react';
 import connectDB from '@/lib/mongodb';
 import Product from '@/models/Product';
 import { extractIdFromSlug } from '@/lib/slugify';
 import BackButton from '@/components/BackButton';
+import ProductImageGallery from '@/components/ProductImageGallery';
+import BuyNowButton from '@/components/BuyNowButton';
+import { convertToOopBuy, currencySymbols, conversionRates } from '@/lib/productUtils';
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }) {
@@ -85,52 +87,14 @@ export default async function ProductPage({ params, searchParams }) {
     notFound();
   }
 
-  const getPlatformId = (platform) => {
-    const platformLower = platform?.toLowerCase();
-    if (platformLower === '1688') return 0;
-    if (platformLower === 'taobao') return 1;
-    if (platformLower === 'weidian') return 2;
-    return 1;
-  };
-
-  const convertToOopBuy = (id, platform) => {
-    const inviteCode = 'DMP60XRTF';
-    const platformId = getPlatformId(platform);
-
-    switch (platformId) {
-      case 0:
-        return `https://oopbuy.com/goods/details?id=${id}&channel=1688&inviteCode=${inviteCode}`;
-      case 1:
-        return `https://oopbuy.com/goods/details?id=${id}&channel=TAOBAO&inviteCode=${inviteCode}`;
-      case 2:
-        return `https://oopbuy.com/goods/details?id=${id}&channel=WEIDIAN&inviteCode=${inviteCode}`;
-      default:
-        return '';
-    }
-  };
-
-  const currencySymbols = {
-    USD: '$',
-    GBP: '£',
-    EUR: '€',
-    CNY: '¥',
-  };
-
-  const conversionRates = {
-    USD: 0.14,
-    GBP: 0.11,
-    EUR: 0.12,
-    CNY: 1.0,
-  };
-
   const validImages = product.images
     ?.map(img => typeof img === 'string' ? img : img?.url)
     .filter(img => {
       if (!img || typeof img !== 'string' || img.trim() === '') return false;
-      // Exclude local /assets/ paths that don't exist
-      if (img.startsWith('/assets/')) return false;
-      // Only allow valid HTTP(S) URLs
-      return img.startsWith('http://') || img.startsWith('https://');
+      // Allow /uploads/, /assets/ paths (they'll be rewritten by next.config.js)
+      // Allow HTTP(S) URLs
+      // Allow paths starting with /
+      return img.startsWith('http://') || img.startsWith('https://') || img.startsWith('/');
     }) || [];
 
   const structuredData = {
@@ -178,51 +142,7 @@ export default async function ProductPage({ params, searchParams }) {
 
           <div className="grid lg:grid-cols-2 gap-8 mt-6">
             {/* Left Column - Images */}
-            <div className="space-y-4">
-              {/* Main Image Card */}
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden p-4">
-                <div className="relative w-full aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl overflow-hidden">
-                  {validImages[0] ? (
-                    <Image
-                      src={validImages[0]}
-                      alt={product.name || 'Product'}
-                      fill
-                      unoptimized
-                      className="object-contain p-4"
-                      priority
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center">
-                        <Package className="w-16 h-16 text-gray-300 mx-auto mb-2" />
-                        <p className="text-gray-400 text-sm">No image available</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Thumbnail Gallery */}
-              {validImages.length > 1 && (
-                <div className="grid grid-cols-4 gap-3">
-                  {validImages.slice(0, 4).map((img, idx) => (
-                    <div key={idx} className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden p-2 hover:border-[#FF186B] transition-colors cursor-pointer">
-                      <div className="relative aspect-square">
-                        <Image
-                          src={img}
-                          alt={`${product.name} ${idx + 1}`}
-                          fill
-                          unoptimized
-                          className="object-cover rounded-lg"
-                          sizes="100px"
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+            <ProductImageGallery images={validImages} productName={product.name} />
 
             {/* Right Column - Product Info */}
             <div className="space-y-6">
@@ -285,17 +205,10 @@ export default async function ProductPage({ params, searchParams }) {
 
               {/* Buy Button */}
               {product.id && product.store ? (
-                <a
+                <BuyNowButton
+                  product={product}
                   href={convertToOopBuy(product.id, product.store)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full"
-                >
-                  <button className="w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-[#FF186B] to-pink-600 text-white rounded-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 font-bold text-lg">
-                    <ShoppingCart className="w-6 h-6" />
-                    Buy Now on OOPBuy
-                  </button>
-                </a>
+                />
               ) : (
                 <div className="w-full text-center py-4 bg-gray-100 rounded-xl text-gray-500 font-medium">
                   Product link not available
