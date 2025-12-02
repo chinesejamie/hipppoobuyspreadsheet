@@ -29,8 +29,8 @@ export default function Pagination({ currentPage, hasMore, productsCount }) {
       `;
       document.body.appendChild(overlay);
 
-      // Scroll to top smoothly
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Scroll to products section smoothly
+      productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     // Update URL and navigate
@@ -42,7 +42,7 @@ export default function Pagination({ currentPage, hasMore, productsCount }) {
     }
 
     const queryString = params.toString();
-    const newUrl = queryString ? `/?${queryString}` : '/';
+    const newUrl = queryString ? `/?${queryString}#products` : '/#products';
 
     // Navigate after a tiny delay to show overlay
     setTimeout(() => {
