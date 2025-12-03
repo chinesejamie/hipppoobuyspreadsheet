@@ -13,14 +13,14 @@ export default function HowItWorks() {
     {
       icon: ShoppingCart,
       title: "Click & Buy",
-      description: "Found something you love? Click the buy button to go directly to OOPBuy's secure platform. Use your invite code for instant coupon access and exclusive member pricing.",
+      description: "Found something you love? Click the buy button to go directly to CNFans's secure platform. Use your invite code for instant coupon access and exclusive member pricing.",
       color: "from-purple-500 to-purple-600"
     },
     {
       icon: Package,
       title: "We Handle Everything",
-      description: "OOPBuy purchases from the Chinese seller, receives the product at our warehouse, inspects quality, and prepares it for international shipping. No Chinese required!",
-      color: "from-pink-500 to-pink-600"
+      description: "CNFans purchases from the Chinese seller, receives the product at our warehouse, inspects quality, and prepares it for international shipping. No Chinese required!",
+      color: "from-pink-500 to-red-700"
     },
     {
       icon: Truck,
@@ -31,7 +31,7 @@ export default function HowItWorks() {
     {
       icon: CheckCircle,
       title: "Enjoy Your Products",
-      description: "Receive authentic products at 50-80% off retail prices. Quality guaranteed, buyer protection included. Shop with confidence knowing OOPBuy has your back.",
+      description: "Receive authentic products at 50-80% off retail prices. Quality guaranteed, buyer protection included. Shop with confidence knowing CNFans has your back.",
       color: "from-green-500 to-green-600"
     }
   ];
@@ -59,11 +59,11 @@ export default function HowItWorks() {
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#FF186B]/10 rounded-full mb-4">
-            <CheckCircle className="w-5 h-5 text-[#FF186B]" />
-            <span className="text-[#FF186B] font-semibold text-sm">Simple Process</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#C92910]/10 rounded-full mb-4">
+            <CheckCircle className="w-5 h-5 text-[#C92910]" />
+            <span className="text-[#C92910] font-semibold text-sm">Simple Process</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 bg-gradient-to-r from-[#FF186B] to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 bg-gradient-to-r from-[#C92910] to-purple-600 bg-clip-text text-transparent">
             How It Works
           </h2>
           <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
@@ -104,11 +104,11 @@ export default function HowItWorks() {
         </div>
 
         {/* Benefits Bar */}
-        <div className="mt-12 sm:mt-16 bg-white rounded-2xl shadow-xl border-2 border-[#FF186B]/20 p-6 sm:p-8">
+        <div className="mt-12 sm:mt-16 bg-white rounded-2xl shadow-xl border-2 border-[#C92910]/20 p-6 sm:p-8">
           <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
             {benefits.map((benefit, index) => (
               <div key={index} className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FF186B] to-pink-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#C92910] to-red-700 flex items-center justify-center flex-shrink-0 shadow-lg">
                   <benefit.icon className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -127,10 +127,10 @@ export default function HowItWorks() {
         {/* CTA */}
         <div className="text-center mt-8 sm:mt-12">
           <a
-            href="https://oopbuy.com/register?inviteCode=DMP60XRTF"
+            href="https://cnfans.com/register?ref=137664"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#FF186B] via-pink-600 to-purple-600 text-white rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-bold text-base sm:text-lg"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#C92910] via-red-700 to-purple-600 text-white rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-bold text-base sm:text-lg"
           >
             Start Shopping Now - Get Coupons!
           </a>

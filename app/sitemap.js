@@ -4,7 +4,7 @@ import { generateSlug } from '@/lib/slugify';
 import { getAllArticles } from '@/lib/articles';
 
 export default async function sitemap() {
-  const baseUrl = 'https://oopbuyproducts.net';
+  const baseUrl = 'https://cnfansportal.com';
 
   try {
     await connectDB();

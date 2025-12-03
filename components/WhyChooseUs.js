@@ -32,7 +32,7 @@ export default function WhyChooseUs() {
       icon: TrendingDown,
       title: "Exclusive Coupon Codes",
       description: "Sign up for instant access to member-only discounts, seasonal sales, and promotional codes. Save even more on already low prices.",
-      gradient: "from-pink-400 to-pink-600"
+      gradient: "from-pink-400 to-red-700"
     },
     {
       icon: HeartHandshake,
@@ -59,15 +59,15 @@ export default function WhyChooseUs() {
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#FF186B]/10 rounded-full mb-4">
-            <Award className="w-5 h-5 text-[#FF186B]" />
-            <span className="text-[#FF186B] font-semibold text-sm">Why Choose OOPBuy</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#C92910]/10 rounded-full mb-4">
+            <Award className="w-5 h-5 text-[#C92910]" />
+            <span className="text-[#C92910] font-semibold text-sm">Why Choose CNFans</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 bg-gradient-to-r from-[#FF186B] to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 bg-gradient-to-r from-[#C92910] to-purple-600 bg-clip-text text-transparent">
             Your Trusted Chinese Shopping Agent
           </h2>
           <p className="text-gray-600 text-base sm:text-lg max-w-3xl mx-auto">
-            We make international shopping simple, safe, and affordable. Discover why thousands choose OOPBuy for their Chinese marketplace purchases.
+            We make international shopping simple, safe, and affordable. Discover why thousands choose CNFans for their Chinese marketplace purchases.
           </p>
         </div>
 
@@ -76,7 +76,7 @@ export default function WhyChooseUs() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="group bg-white rounded-2xl p-6 shadow-md border border-gray-200 hover:shadow-xl hover:border-[#FF186B]/30 transition-all duration-300 hover:-translate-y-1"
+              className="group bg-white rounded-2xl p-6 shadow-md border border-gray-200 hover:shadow-xl hover:border-[#C92910]/30 transition-all duration-300 hover:-translate-y-1"
             >
               {/* Icon */}
               <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
@@ -95,7 +95,7 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Stats Bar */}
-        <div className="mt-12 bg-gradient-to-r from-[#FF186B] via-pink-600 to-purple-600 rounded-2xl p-8 sm:p-10 shadow-2xl">
+        <div className="mt-12 bg-gradient-to-r from-[#C92910] via-red-700 to-purple-600 rounded-2xl p-8 sm:p-10 shadow-2xl">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center text-white">
             <div>
               <div className="text-3xl sm:text-4xl lg:text-5xl font-black mb-2">50-80%</div>

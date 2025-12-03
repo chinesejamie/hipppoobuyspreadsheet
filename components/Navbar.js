@@ -27,12 +27,12 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#FF186B] to-pink-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+            <div className="w-10 h-10 bg-gradient-to-br from-[#C92910] to-red-700 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
               <ShoppingBag className="w-6 h-6 text-white" />
             </div>
             <div className="hidden sm:block">
-              <span className="text-xl font-black bg-gradient-to-r from-[#FF186B] to-purple-600 bg-clip-text text-transparent">
-                OOPBuy
+              <span className="text-xl font-black bg-gradient-to-r from-[#C92910] to-red-700 bg-clip-text text-transparent">
+                CNFans
               </span>
               <span className="text-xs text-gray-500 block -mt-1">Spreadsheet</span>
             </div>
@@ -48,7 +48,7 @@ export default function Navbar() {
                   href={item.href}
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
                     isActive(item.href)
-                      ? 'bg-[#FF186B]/10 text-[#FF186B]'
+                      ? 'bg-[#C92910]/10 text-[#C92910]'
                       : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                   }`}
                 >
@@ -62,10 +62,10 @@ export default function Navbar() {
           {/* Desktop CTA Button */}
           <div className="hidden md:block">
             <a
-              href="https://oopbuy.com/register?inviteCode=DMP60XRTF"
+              href="https://cnfans.com/register?ref=137664"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#FF186B] to-pink-600 text-white rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 font-bold text-sm"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#C92910] to-red-700 text-white rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 font-bold text-sm"
             >
               <Gift className="w-4 h-4" />
               Get Coupons
@@ -99,7 +99,7 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className={`flex items-center gap-3 px-4 py-3 rounded-lg font-semibold transition-all ${
                     isActive(item.href)
-                      ? 'bg-[#FF186B]/10 text-[#FF186B]'
+                      ? 'bg-[#C92910]/10 text-[#C92910]'
                       : 'text-gray-600 hover:bg-gray-100'
                   }`}
                 >
@@ -111,10 +111,10 @@ export default function Navbar() {
 
             {/* Mobile CTA */}
             <a
-              href="https://oopbuy.com/register?inviteCode=DMP60XRTF"
+              href="https://cnfans.com/register?ref=137664"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-[#FF186B] to-pink-600 text-white rounded-lg hover:shadow-lg transition-all font-bold mt-2"
+              className="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-[#C92910] to-red-700 text-white rounded-lg hover:shadow-lg transition-all font-bold mt-2"
               onClick={() => setIsOpen(false)}
             >
               <Gift className="w-5 h-5" />

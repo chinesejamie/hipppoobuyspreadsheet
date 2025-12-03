@@ -48,8 +48,8 @@ export default function ProductImageGallery({ images, productName }) {
               onClick={() => setSelectedImage(idx)}
               className={`bg-white rounded-xl shadow-md border-2 overflow-hidden p-2 transition-all duration-200 cursor-pointer ${
                 selectedImage === idx
-                  ? 'border-[#FF186B] ring-2 ring-[#FF186B]/30 scale-105'
-                  : 'border-gray-200 hover:border-[#FF186B]/50 hover:scale-105'
+                  ? 'border-[#C92910] ring-2 ring-[#C92910]/30 scale-105'
+                  : 'border-gray-200 hover:border-[#C92910]/50 hover:scale-105'
               }`}
             >
               <div className="relative aspect-square">
@@ -63,7 +63,7 @@ export default function ProductImageGallery({ images, productName }) {
                 />
               </div>
               {selectedImage === idx && (
-                <div className="absolute inset-0 bg-[#FF186B]/10 rounded-lg pointer-events-none" />
+                <div className="absolute inset-0 bg-[#C92910]/10 rounded-lg pointer-events-none" />
               )}
             </button>
           ))}
@@ -74,7 +74,7 @@ export default function ProductImageGallery({ images, productName }) {
       {images.length > 1 && (
         <div className="text-center">
           <p className="text-sm text-gray-600">
-            Image <span className="font-bold text-[#FF186B]">{selectedImage + 1}</span> of{' '}
+            Image <span className="font-bold text-[#C92910]">{selectedImage + 1}</span> of{' '}
             <span className="font-bold">{Math.min(images.length, 8)}</span>
           </p>
         </div>

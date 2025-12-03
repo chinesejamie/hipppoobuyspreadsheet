@@ -21,7 +21,7 @@ export default function BackButton({ returnUrl }) {
   return (
     <button
       onClick={handleBack}
-      className="inline-flex items-center gap-2 text-gray-600 hover:text-[#FF186B] mb-6 transition-colors"
+      className="inline-flex items-center gap-2 text-gray-600 hover:text-[#C92910] mb-6 transition-colors"
     >
       <ArrowLeft className="w-5 h-5" />
       <span className="font-medium">Back to Products</span>

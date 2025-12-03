@@ -1,4 +1,4 @@
-# OOPBuy Spreadsheet - Deployment Guide
+# CNFans Spreadsheet - Deployment Guide
 
 ## Quick Deployment
 
@@ -27,7 +27,7 @@ That's it! The script handles everything automatically.
 - Includes `.env` file securely
 
 ### 3. **Upload to Server** 📤
-- Creates `/var/www/oopbuyproducts.net` directory
+- Creates `/var/www/cnfansportal.com` directory
 - Uploads all files via rsync
 - Uses your existing `keyChina.pem` SSH key
 - Connects to server: `212.227.74.41`
@@ -72,8 +72,8 @@ Edit `deploy.sh` if you need to change:
 ```bash
 SSH_KEY="keyChina.pem"           # Your SSH key
 SERVER_IP="212.227.74.41"        # Your server IP
-REMOTE_DIR="/var/www/oopbuyproducts.net"  # Deploy directory
-APP_NAME="oopbuyproducts"        # PM2 process name
+REMOTE_DIR="/var/www/cnfansportal.com"  # Deploy directory
+APP_NAME="cnfansportal"        # PM2 process name
 ```
 
 ### Environment Variables
@@ -89,24 +89,24 @@ NODE_ENV=production
 
 ### View Logs
 ```bash
-pm2 logs oopbuyproducts
-pm2 logs oopbuyproducts --lines 100
+pm2 logs cnfansportal
+pm2 logs cnfansportal --lines 100
 ```
 
 ### Check Status
 ```bash
 pm2 status
-pm2 info oopbuyproducts
+pm2 info cnfansportal
 ```
 
 ### Restart Application
 ```bash
-pm2 restart oopbuyproducts
+pm2 restart cnfansportal
 ```
 
 ### Stop Application
 ```bash
-pm2 stop oopbuyproducts
+pm2 stop cnfansportal
 ```
 
 ### Monitor Resources
@@ -128,7 +128,7 @@ After deployment, configure Nginx to proxy to your app:
 ```nginx
 server {
     listen 80;
-    server_name oopbuyproducts.net www.oopbuyproducts.net;
+    server_name cnfansportal.com www.cnfansportal.com;
 
     location / {
         proxy_pass http://localhost:3000;  # Use the port shown in deployment
@@ -144,11 +144,11 @@ server {
 }
 ```
 
-Save to: `/etc/nginx/sites-available/oopbuyproducts.net`
+Save to: `/etc/nginx/sites-available/cnfansportal.com`
 
 ### Enable Site
 ```bash
-ln -s /etc/nginx/sites-available/oopbuyproducts.net /etc/nginx/sites-enabled/
+ln -s /etc/nginx/sites-available/cnfansportal.com /etc/nginx/sites-enabled/
 nginx -t  # Test configuration
 systemctl reload nginx
 ```
@@ -156,7 +156,7 @@ systemctl reload nginx
 ### Add SSL (Recommended)
 ```bash
 apt-get install certbot python3-certbot-nginx
-certbot --nginx -d oopbuyproducts.net -d www.oopbuyproducts.net
+certbot --nginx -d cnfansportal.com -d www.cnfansportal.com
 ```
 
 ---
@@ -167,7 +167,7 @@ certbot --nginx -d oopbuyproducts.net -d www.oopbuyproducts.net
 The script automatically finds an available port. Check which port was assigned:
 ```bash
 ssh -i keyChina.pem root@212.227.74.41
-pm2 info oopbuyproducts
+pm2 info cnfansportal
 ```
 
 ### Application Not Starting
@@ -176,8 +176,8 @@ pm2 info oopbuyproducts
 ssh -i keyChina.pem root@212.227.74.41
 
 # Check logs
-cd /var/www/oopbuyproducts.net
-pm2 logs oopbuyproducts
+cd /var/www/cnfansportal.com
+pm2 logs cnfansportal
 
 # Check for errors
 cat logs/pm2-error.log
@@ -194,8 +194,8 @@ mongosh "mongodb://admin:password@212.227.74.41:27017/myChinaFinds?authSource=ad
 ```bash
 # Fix ownership
 ssh -i keyChina.pem root@212.227.74.41
-chown -R root:root /var/www/oopbuyproducts.net
-chmod -R 755 /var/www/oopbuyproducts.net
+chown -R root:root /var/www/cnfansportal.com
+chmod -R 755 /var/www/cnfansportal.com
 ```
 
 ---
@@ -228,7 +228,7 @@ The script will:
 ## File Structure on Server
 
 ```
-/var/www/oopbuyproducts.net/
+/var/www/cnfansportal.com/
 ├── .next/              # Built Next.js files
 ├── node_modules/       # Production dependencies
 ├── app/                # Application code
@@ -256,14 +256,14 @@ pm2 monit
 ```
 
 ### Increase Memory Limit (if needed)
-Edit on server: `/var/www/oopbuyproducts.net/ecosystem.config.js`
+Edit on server: `/var/www/cnfansportal.com/ecosystem.config.js`
 ```javascript
 max_memory_restart: '2G',  // Change from 1G to 2G
 ```
 
 Then restart:
 ```bash
-pm2 restart oopbuyproducts
+pm2 restart cnfansportal
 ```
 
 ### Enable Clustering (Multiple Instances)
@@ -287,16 +287,16 @@ instances: 'max',  // Uses all CPU cores
 ## Support
 
 ### Logs Location
-- **On Server**: `/var/www/oopbuyproducts.net/logs/`
-- **PM2 Logs**: `pm2 logs oopbuyproducts`
+- **On Server**: `/var/www/cnfansportal.com/logs/`
+- **PM2 Logs**: `pm2 logs cnfansportal`
 
 ### Common Commands
 ```bash
 # View real-time logs
-pm2 logs oopbuyproducts --lines 50 --raw
+pm2 logs cnfansportal --lines 50 --raw
 
 # Restart after config changes
-pm2 restart oopbuyproducts
+pm2 restart cnfansportal
 
 # Update PM2
 pm2 update
@@ -312,10 +312,10 @@ pm2 save
 | Action | Command |
 |--------|---------|
 | Deploy | `./deploy.sh` |
-| View Logs | `ssh -i keyChina.pem root@212.227.74.41 "pm2 logs oopbuyproducts"` |
-| Restart | `ssh -i keyChina.pem root@212.227.74.41 "pm2 restart oopbuyproducts"` |
+| View Logs | `ssh -i keyChina.pem root@212.227.74.41 "pm2 logs cnfansportal"` |
+| Restart | `ssh -i keyChina.pem root@212.227.74.41 "pm2 restart cnfansportal"` |
 | Status | `ssh -i keyChina.pem root@212.227.74.41 "pm2 status"` |
 
 ---
 
-**🎉 Your OOPBuy Spreadsheet is now deployed and running!**
+**🎉 Your CNFans Spreadsheet is now deployed and running!**

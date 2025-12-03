@@ -7,6 +7,6 @@ export default function robots() {
         disallow: ['/api/', '/admin/'],
       },
     ],
-    sitemap: 'https://oopbuyproducts.net/sitemap.xml',
+    sitemap: 'https://cnfansportal.com/sitemap.xml',
   };
 }

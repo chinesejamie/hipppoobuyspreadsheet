@@ -48,7 +48,7 @@ export async function GET(request) {
     }
 
     try {
-      product.link = convertToJoyaBuy(product.id, product.store);
+      product.link = convertToCNFans(product.id, product.store);
     } catch (error) {
       console.error("Link conversion error:", error.message);
     }
@@ -63,10 +63,10 @@ export async function GET(request) {
   }
 }
 
-function convertToJoyaBuy(id, platform) {
+function convertToCNFans(id, platform) {
   const inviteCode = '137664';
   const platformId = getPlatformId(platform);
-  return processToJoyaBuy(platformId, id, inviteCode);
+  return processToCNFans(platformId, id, inviteCode);
 }
 
 function getPlatformId(platform) {
@@ -82,7 +82,7 @@ function getPlatformId(platform) {
   }
 }
 
-function processToJoyaBuy(platformId, productId, inviteCode) {
+function processToCNFans(platformId, productId, inviteCode) {
   switch (platformId) {
     case 0:
       return `https://cnfans.com/product/?shop_type=ali_1688&id=${productId}&ref=${inviteCode}`;

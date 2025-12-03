@@ -11,12 +11,12 @@ export async function generateMetadata({ params }) {
 
   if (!article) {
     return {
-      title: 'Article Not Found - OOPBuy Blog',
+      title: 'Article Not Found - CNFans Blog',
     };
   }
 
   return {
-    title: `${article.title} | OOPBuy Blog`,
+    title: `${article.title} | CNFans Blog`,
     description: article.excerpt,
     keywords: article.title.toLowerCase().split(' ').join(', '),
     openGraph: {
@@ -69,20 +69,20 @@ export default async function ArticlePage({ params }) {
     "author": {
       "@type": "Organization",
       "name": article.author,
-      "url": "https://oopbuy.com"
+      "url": "https://cnfans.com"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "OOPBuy",
-      "url": "https://oopbuy.com",
+      "name": "CNFans",
+      "url": "https://cnfans.com",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://oopbuyproducts.net/logo.png"
+        "url": "https://cnfansportal.com/logo.png"
       }
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://oopbuyproducts.net/blog/${article.slug}`
+      "@id": `https://cnfansportal.com/blog/${article.slug}`
     }
   };
 
@@ -95,19 +95,19 @@ export default async function ArticlePage({ params }) {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://oopbuyproducts.net"
+        "item": "https://cnfansportal.com"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Blog",
-        "item": "https://oopbuyproducts.net/blog"
+        "item": "https://cnfansportal.com/blog"
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": article.title,
-        "item": `https://oopbuyproducts.net/blog/${article.slug}`
+        "item": `https://cnfansportal.com/blog/${article.slug}`
       }
     ]
   };
@@ -152,7 +152,7 @@ export default async function ArticlePage({ params }) {
 
             {/* Category Badge */}
             <div className="mb-4">
-              <span className="px-3 py-1 bg-[#FF186B] text-white rounded-full text-sm font-semibold">
+              <span className="px-3 py-1 bg-[#C92910] text-white rounded-full text-sm font-semibold">
                 {article.category}
               </span>
             </div>
@@ -187,7 +187,7 @@ export default async function ArticlePage({ params }) {
         {/* Content */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Article Excerpt */}
-          <div className="bg-gradient-to-r from-[#FF186B]/10 to-purple-100 rounded-2xl p-6 mb-8 border-l-4 border-[#FF186B]">
+          <div className="bg-gradient-to-r from-[#C92910]/10 to-purple-100 rounded-2xl p-6 mb-8 border-l-4 border-[#C92910]">
             <p className="text-lg text-gray-700 leading-relaxed font-medium">
               {article.excerpt}
             </p>
@@ -201,13 +201,13 @@ export default async function ArticlePage({ params }) {
             prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
             prose-h4:text-xl prose-h4:mt-6 prose-h4:mb-3
             prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-4
-            prose-a:text-[#FF186B] prose-a:font-semibold prose-a:no-underline hover:prose-a:underline
+            prose-a:text-[#C92910] prose-a:font-semibold prose-a:no-underline hover:prose-a:underline
             prose-strong:text-gray-900 prose-strong:font-bold
             prose-em:text-gray-700 prose-em:italic
             prose-ul:my-6 prose-ul:list-disc prose-ul:pl-6
             prose-ol:my-6 prose-ol:list-decimal prose-ol:pl-6
             prose-li:text-gray-700 prose-li:my-2 prose-li:leading-relaxed
-            prose-blockquote:border-l-4 prose-blockquote:border-[#FF186B] prose-blockquote:bg-gray-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:italic
+            prose-blockquote:border-l-4 prose-blockquote:border-[#C92910] prose-blockquote:bg-gray-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:italic
             prose-code:text-pink-600 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
             prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto
             prose-table:border-collapse prose-table:w-full prose-table:my-8
@@ -221,11 +221,11 @@ export default async function ArticlePage({ params }) {
                 h3: ({node, ...props}) => <h3 className="text-2xl font-bold text-gray-900 mt-8 mb-4" {...props} />,
                 h4: ({node, ...props}) => <h4 className="text-xl font-bold text-gray-900 mt-6 mb-3" {...props} />,
                 p: ({node, ...props}) => <p className="text-gray-700 leading-relaxed mb-4" {...props} />,
-                a: ({node, ...props}) => <a className="text-[#FF186B] font-semibold hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+                a: ({node, ...props}) => <a className="text-[#C92910] font-semibold hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
                 ul: ({node, ...props}) => <ul className="list-disc pl-6 my-6 space-y-2" {...props} />,
                 ol: ({node, ...props}) => <ol className="list-decimal pl-6 my-6 space-y-2" {...props} />,
                 li: ({node, ...props}) => <li className="text-gray-700 leading-relaxed" {...props} />,
-                blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-[#FF186B] bg-gray-50 py-4 px-6 my-6 italic" {...props} />,
+                blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-[#C92910] bg-gray-50 py-4 px-6 my-6 italic" {...props} />,
                 code: ({node, inline, ...props}) =>
                   inline
                     ? <code className="text-pink-600 bg-gray-100 px-1 py-0.5 rounded text-sm font-mono" {...props} />
@@ -242,18 +242,18 @@ export default async function ArticlePage({ params }) {
           </article>
 
           {/* CTA Box */}
-          <div className="mt-12 bg-gradient-to-r from-[#FF186B] via-pink-600 to-purple-600 rounded-2xl p-8 text-center text-white shadow-2xl">
+          <div className="mt-12 bg-gradient-to-r from-[#C92910] via-red-700 to-purple-600 rounded-2xl p-8 text-center text-white shadow-2xl">
             <h3 className="text-2xl sm:text-3xl font-black mb-3">
               Ready to Put This Guide Into Action?
             </h3>
             <p className="text-white/90 mb-6 max-w-2xl mx-auto">
-              Sign up for OOPBuy now and start saving 50-80% on authentic products from China. Get exclusive coupon codes instantly!
+              Sign up for CNFans now and start saving 50-80% on authentic products from China. Get exclusive coupon codes instantly!
             </p>
             <a
-              href="https://oopbuy.com/register?inviteCode=DMP60XRTF"
+              href="https://cnfans.com/register?ref=137664"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#FF186B] rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-bold text-lg"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#C92910] rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-bold text-lg"
             >
               Sign Up & Get Coupons Now
               <ArrowRight className="w-6 h-6" />
@@ -271,7 +271,7 @@ export default async function ArticlePage({ params }) {
                     href={`/blog/${related.slug}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden hover:shadow-xl hover:border-[#FF186B]/30 transition-all duration-300 hover:-translate-y-1"
+                    className="group bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden hover:shadow-xl hover:border-[#C92910]/30 transition-all duration-300 hover:-translate-y-1"
                   >
                     <div className="relative h-40 bg-gradient-to-br from-gray-100 to-gray-200">
                       <Image
@@ -285,10 +285,10 @@ export default async function ArticlePage({ params }) {
                       <span className="text-xs px-2 py-1 bg-purple-100 text-purple-700 rounded-full font-medium">
                         {related.category}
                       </span>
-                      <h3 className="text-base font-bold text-gray-900 mt-2 mb-2 line-clamp-2 group-hover:text-[#FF186B] transition-colors">
+                      <h3 className="text-base font-bold text-gray-900 mt-2 mb-2 line-clamp-2 group-hover:text-[#C92910] transition-colors">
                         {related.title}
                       </h3>
-                      <div className="flex items-center text-[#FF186B] font-semibold text-sm">
+                      <div className="flex items-center text-[#C92910] font-semibold text-sm">
                         Read More
                         <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                       </div>
@@ -303,7 +303,7 @@ export default async function ArticlePage({ params }) {
           <div className="mt-12 text-center">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-gray-600 hover:text-[#FF186B] font-semibold transition-colors"
+              className="inline-flex items-center gap-2 text-gray-600 hover:text-[#C92910] font-semibold transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
               Back to All Guides

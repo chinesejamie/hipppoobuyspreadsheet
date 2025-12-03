@@ -18,7 +18,7 @@ export async function generateMetadata({ params }) {
 
     if (!product) {
       return {
-        title: 'Product Not Found - OOPBuy',
+        title: 'Product Not Found - CNFans',
         description: 'The product you are looking for could not be found.'
       };
     }
@@ -30,15 +30,15 @@ export async function generateMetadata({ params }) {
     const imageUrl = validImages[0] || null;
 
     return {
-      title: `${product.name} - ${product.category || 'Product'} | OOPBuy Spreadsheet`,
+      title: `${product.name} - ${product.category || 'Product'} | CNFans Spreadsheet`,
       description: product.description || `Buy ${product.name} from ${product.store || 'Chinese shopping platforms'}. Best deals on authentic products.`,
-      keywords: `${product.name}, ${product.category}, ${product.store}, Chinese shopping, OOPBuy, buy online, cheap deals`,
+      keywords: `${product.name}, ${product.category}, ${product.store}, Chinese shopping, CNFans, buy online, cheap deals`,
       openGraph: {
         title: product.name,
         description: product.description || `Buy ${product.name} from ${product.store}`,
         ...(imageUrl && { images: [imageUrl] }),
         type: 'website',
-        siteName: 'OOPBuy Spreadsheet',
+        siteName: 'CNFans Spreadsheet',
       },
       twitter: {
         card: 'summary_large_image',
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }) {
     };
   } catch (error) {
     return {
-      title: 'Product - OOPBuy',
+      title: 'Product - CNFans',
       description: 'Find the best deals on Chinese shopping platforms'
     };
   }
@@ -127,17 +127,17 @@ export default async function ProductPage({ params, searchParams }) {
     "description": product.description || `Buy ${product.name}`,
     "brand": {
       "@type": "Brand",
-      "name": product.store || "OOPBuy"
+      "name": product.store || "CNFans"
     },
     "offers": {
       "@type": "Offer",
-      "url": `https://oopbuyproducts.net/product/${product._id}`,
+      "url": `https://cnfansportal.com/product/${product._id}`,
       "priceCurrency": "CNY",
       "price": product.price,
       "availability": "https://schema.org/InStock",
       "seller": {
         "@type": "Organization",
-        "name": product.creatorName || "OOPBuy"
+        "name": product.creatorName || "CNFans"
       }
     },
     "category": product.category
@@ -166,7 +166,7 @@ export default async function ProductPage({ params, searchParams }) {
           <BackButton returnUrl={returnUrl} />
 
           {/* Product Details */}
-          <div className="bg-white rounded-3xl shadow-2xl border-2 border-[#FF186B]/20 overflow-hidden">
+          <div className="bg-white rounded-3xl shadow-2xl border-2 border-[#C92910]/20 overflow-hidden">
             <div className="grid md:grid-cols-2 gap-8 p-6 md:p-10">
               {/* Image Gallery */}
               <div className="space-y-4">
@@ -215,7 +215,7 @@ export default async function ProductPage({ params, searchParams }) {
                 {/* Badges */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {product.category && (
-                    <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#FF186B]/10 text-[#FF186B] rounded-full text-sm font-semibold">
+                    <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#C92910]/10 text-[#C92910] rounded-full text-sm font-semibold">
                       <Tag className="w-4 h-4" />
                       {product.category}
                     </span>
@@ -247,13 +247,13 @@ export default async function ProductPage({ params, searchParams }) {
                 )}
 
                 {/* Price Section */}
-                <div className="bg-gradient-to-r from-[#FF186B]/10 to-purple-100 rounded-2xl p-6 mb-6">
+                <div className="bg-gradient-to-r from-[#C92910]/10 to-purple-100 rounded-2xl p-6 mb-6">
                   <p className="text-sm text-gray-600 mb-2">Price</p>
                   <div className="space-y-2">
                     {Object.entries(conversionRates).map(([curr, rate]) => (
                       <div key={curr} className="flex justify-between items-center">
                         <span className="text-gray-700 font-medium">{curr}</span>
-                        <span className="text-2xl font-bold text-[#FF186B]">
+                        <span className="text-2xl font-bold text-[#C92910]">
                           {currencySymbols[curr]}{(product.price * rate).toFixed(2)}
                         </span>
                       </div>
@@ -267,7 +267,7 @@ export default async function ProductPage({ params, searchParams }) {
                     href={convertToJoyaBuy(product.id, product.store)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-[#FF186B] to-pink-600 text-white rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-200 font-bold text-lg"
+                    className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-[#C92910] to-red-700 text-white rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-200 font-bold text-lg"
                   >
                     <ShoppingCart className="w-6 h-6" />
                     Buy Now on CNFans
@@ -298,7 +298,7 @@ export default async function ProductPage({ params, searchParams }) {
             <div className="prose prose-gray max-w-none">
               <p className="text-gray-600 leading-relaxed">
                 Looking to buy <strong>{product.name}</strong>? You've found the right place! This product is available through
-                trusted Chinese shopping platforms including {product.store || '1688, Taobao, and Weidian'}. OOPBuy Spreadsheet
+                trusted Chinese shopping platforms including {product.store || '1688, Taobao, and Weidian'}. CNFans Spreadsheet
                 helps you discover authentic products at the best prices directly from Chinese suppliers.
               </p>
               <p className="text-gray-600 leading-relaxed mt-4">

@@ -4,11 +4,11 @@ import { getAllArticles } from '@/lib/articles';
 import { Clock, Calendar, ArrowRight, BookOpen } from 'lucide-react';
 
 export const metadata = {
-  title: 'Shopping Guides & Tips - Learn How to Save on Chinese Shopping | OOPBuy Blog',
+  title: 'Shopping Guides & Tips - Learn How to Save on Chinese Shopping | CNFans Blog',
   description: 'Expert guides on buying from Taobao, 1688, and Weidian. Learn how to save 50-80% on authentic products with our comprehensive shopping tutorials.',
   keywords: 'Taobao guide, 1688 shopping, Weidian tutorial, Chinese shopping tips, how to buy from China, save money shopping',
   openGraph: {
-    title: 'Shopping Guides & Tips - OOPBuy Blog',
+    title: 'Shopping Guides & Tips - CNFans Blog',
     description: 'Expert guides on buying from Chinese platforms and saving big on authentic products',
     type: 'website',
   }
@@ -20,13 +20,13 @@ export default function BlogPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "name": "OOPBuy Shopping Guides",
+    "name": "CNFans Shopping Guides",
     "description": "Expert guides and tips for shopping from Chinese e-commerce platforms",
-    "url": "https://oopbuyproducts.net/blog",
+    "url": "https://cnfansportal.com/blog",
     "publisher": {
       "@type": "Organization",
-      "name": "OOPBuy",
-      "url": "https://oopbuy.com"
+      "name": "CNFans",
+      "url": "https://cnfans.com"
     }
   };
 
@@ -43,17 +43,17 @@ export default function BlogPage() {
           <div className="text-center mb-12">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 text-gray-600 hover:text-[#FF186B] mb-6 transition-colors"
+              className="inline-flex items-center gap-2 text-gray-600 hover:text-[#C92910] mb-6 transition-colors"
             >
               ← Back to Products
             </Link>
 
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#FF186B]/10 rounded-full mb-4">
-              <BookOpen className="w-5 h-5 text-[#FF186B]" />
-              <span className="text-[#FF186B] font-semibold text-sm">Shopping Guides & Tips</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#C92910]/10 rounded-full mb-4">
+              <BookOpen className="w-5 h-5 text-[#C92910]" />
+              <span className="text-[#C92910] font-semibold text-sm">Shopping Guides & Tips</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-[#FF186B] to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-[#C92910] to-purple-600 bg-clip-text text-transparent">
               Learn to Shop Smarter
             </h1>
             <p className="text-gray-600 text-lg max-w-3xl mx-auto">
@@ -64,7 +64,7 @@ export default function BlogPage() {
           {/* Featured Article */}
           {articles.length > 0 && (
             <div className="mb-12">
-              <div className="bg-white rounded-3xl shadow-2xl border-2 border-[#FF186B]/20 overflow-hidden">
+              <div className="bg-white rounded-3xl shadow-2xl border-2 border-[#C92910]/20 overflow-hidden">
                 <div className="grid md:grid-cols-2 gap-0">
                   {/* Image */}
                   <div className="relative h-64 md:h-full min-h-[300px] bg-gradient-to-br from-gray-100 to-gray-200">
@@ -76,7 +76,7 @@ export default function BlogPage() {
                       priority
                     />
                     <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-[#FF186B] text-white rounded-full text-xs font-semibold">
+                      <span className="px-3 py-1 bg-[#C92910] text-white rounded-full text-xs font-semibold">
                         Featured
                       </span>
                     </div>
@@ -114,7 +114,7 @@ export default function BlogPage() {
                       href={`/blog/${articles[0].slug}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FF186B] to-pink-600 text-white rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-200 font-semibold w-fit"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#C92910] to-red-700 text-white rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-200 font-semibold w-fit"
                     >
                       Read Full Guide
                       <ArrowRight className="w-5 h-5" />
@@ -135,7 +135,7 @@ export default function BlogPage() {
                   href={`/blog/${article.slug}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden hover:shadow-xl hover:border-[#FF186B]/30 transition-all duration-300 hover:-translate-y-1"
+                  className="group bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden hover:shadow-xl hover:border-[#C92910]/30 transition-all duration-300 hover:-translate-y-1"
                 >
                   {/* Image */}
                   <div className="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200">
@@ -159,7 +159,7 @@ export default function BlogPage() {
                       </div>
                     </div>
 
-                    <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-[#FF186B] transition-colors">
+                    <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-[#C92910] transition-colors">
                       {article.title}
                     </h3>
 
@@ -167,7 +167,7 @@ export default function BlogPage() {
                       {article.excerpt}
                     </p>
 
-                    <div className="flex items-center text-[#FF186B] font-semibold text-sm">
+                    <div className="flex items-center text-[#C92910] font-semibold text-sm">
                       Read More
                       <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                     </div>
@@ -178,18 +178,18 @@ export default function BlogPage() {
           </div>
 
           {/* CTA Section */}
-          <div className="bg-gradient-to-r from-[#FF186B] via-pink-600 to-purple-600 rounded-3xl p-8 sm:p-12 text-center text-white shadow-2xl">
+          <div className="bg-gradient-to-r from-[#C92910] via-red-700 to-purple-600 rounded-3xl p-8 sm:p-12 text-center text-white shadow-2xl">
             <h2 className="text-3xl sm:text-4xl font-black mb-4">
               Ready to Start Saving?
             </h2>
             <p className="text-white/90 text-lg mb-6 max-w-2xl mx-auto">
-              Put these guides into action! Sign up for OOPBuy and get exclusive coupon codes to save even more.
+              Put these guides into action! Sign up for CNFans and get exclusive coupon codes to save even more.
             </p>
             <a
-              href="https://oopbuy.com/register?inviteCode=DMP60XRTF"
+              href="https://cnfans.com/register?ref=137664"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#FF186B] rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-bold text-lg"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#C92910] rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-bold text-lg"
             >
               Sign Up & Get Coupons
               <ArrowRight className="w-6 h-6" />

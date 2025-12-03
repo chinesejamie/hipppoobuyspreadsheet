@@ -27,8 +27,8 @@ const nextConfig = {
     ];
   },
   env: {
-    AGENT_NAME: process.env.AGENT_NAME || 'OOPBuy',
-    INVITE_URL: process.env.INVITE_URL || 'https://oopbuy.com/register?inviteCode=DMP60XRTF',
+    AGENT_NAME: process.env.AGENT_NAME || 'CNFans',
+    INVITE_URL: process.env.INVITE_URL || 'https://cnfans.com/register?ref=137664',
     DEBUG_MODE: process.env.DEBUG_MODE || 'false',
   },
 };

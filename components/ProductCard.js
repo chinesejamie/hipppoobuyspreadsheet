@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { ExternalLink, Tag, User, Package } from 'lucide-react';
 import { generateSlug } from '@/lib/slugify';
-import { convertPrice, convertToOopBuy, currencySymbols } from '@/lib/productUtils';
+import { convertPrice, convertToCNFans, currencySymbols } from '@/lib/productUtils';
 import { trackBuyNowClick } from '@/lib/analytics';
 
 export default function ProductCard({ product, currency }) {
@@ -41,7 +41,7 @@ export default function ProductCard({ product, currency }) {
   }
 
   return (
-    <div className="group relative bg-white rounded-xl sm:rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#FF186B]/30 flex flex-col h-full">
+    <div className="group relative bg-white rounded-xl sm:rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-[#C92910]/30 flex flex-col h-full">
       {/* Clickable Card Link */}
       <Link href={productUrl} className="flex-1 flex flex-col">
         {/* Image Container */}
@@ -74,7 +74,7 @@ export default function ProductCard({ product, currency }) {
         {/* Category Badge */}
         {product.category && (
           <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
-            <span className="inline-flex items-center gap-0.5 sm:gap-1 px-2 sm:px-3 py-0.5 sm:py-1 bg-white/95 backdrop-blur-sm text-[#FF186B] rounded-full text-[10px] sm:text-xs font-semibold shadow-lg">
+            <span className="inline-flex items-center gap-0.5 sm:gap-1 px-2 sm:px-3 py-0.5 sm:py-1 bg-white/95 backdrop-blur-sm text-[#C92910] rounded-full text-[10px] sm:text-xs font-semibold shadow-lg">
               <Tag className="w-2 h-2 sm:w-3 sm:h-3" />
               <span className="hidden sm:inline">{product.category}</span>
               <span className="sm:hidden truncate max-w-[60px]">{product.category}</span>
@@ -95,7 +95,7 @@ export default function ProductCard({ product, currency }) {
         {/* Content */}
         <div className="p-3 sm:p-4 md:p-5 flex-1 flex flex-col">
           {/* Product Name */}
-          <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 mb-1 sm:mb-2 line-clamp-2 group-hover:text-[#FF186B] transition-colors">
+          <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 mb-1 sm:mb-2 line-clamp-2 group-hover:text-[#C92910] transition-colors">
             {product.name || 'Unnamed Product'}
           </h3>
 
@@ -117,7 +117,7 @@ export default function ProductCard({ product, currency }) {
             {/* Price */}
             <div className="flex flex-col">
               <span className="text-[10px] sm:text-xs text-gray-500 mb-0.5 sm:mb-1">Price</span>
-              <span className="text-base sm:text-xl lg:text-2xl font-bold text-[#FF186B]">
+              <span className="text-base sm:text-xl lg:text-2xl font-bold text-[#C92910]">
                 {currencySymbols[currency]}{convertPrice(product.price, currency)}
               </span>
             </div>
@@ -129,7 +129,7 @@ export default function ProductCard({ product, currency }) {
       <div className="px-3 sm:px-4 md:px-5 pb-3 sm:pb-4 md:pb-5">
         {product.id && product.store ? (
           <a
-            href={convertToOopBuy(product.id, product.store)}
+            href={convertToCNFans(product.id, product.store)}
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => {
@@ -137,7 +137,7 @@ export default function ProductCard({ product, currency }) {
               // Track the click in Google Analytics
               trackBuyNowClick(product, 'product_card');
             }}
-            className="inline-flex items-center justify-center gap-1 sm:gap-2 w-full px-3 sm:px-4 lg:px-5 py-1.5 sm:py-2 lg:py-2.5 bg-gradient-to-r from-[#FF186B] to-pink-600 text-white rounded-lg sm:rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200 font-semibold text-xs sm:text-sm"
+            className="inline-flex items-center justify-center gap-1 sm:gap-2 w-full px-3 sm:px-4 lg:px-5 py-1.5 sm:py-2 lg:py-2.5 bg-gradient-to-r from-[#C92910] to-red-700 text-white rounded-lg sm:rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200 font-semibold text-xs sm:text-sm"
           >
             <span className="hidden sm:inline">Buy Now</span>
             <span className="sm:hidden">Buy</span>

@@ -1,15 +1,15 @@
 #!/bin/bash
 
-# OOPBuy Spreadsheet - Next.js Deployment Script
-# Uploads to /var/www/oopbuyproducts.net and launches with PM2
+# CNFans Spreadsheet - Next.js Deployment Script
+# Uploads to /var/www/cnfansportal.com and launches with PM2
 
 set -e  # Exit on error
 
 # Configuration
 SSH_KEY="keyChina.pem"
 SERVER_IP="212.227.74.41"
-REMOTE_DIR="/var/www/oopbuyproducts.net"
-APP_NAME="oopbuyproducts"
+REMOTE_DIR="/var/www/cnfansportal.com"
+APP_NAME="cnfansportal"
 
 # Colors for output
 RED='\033[0;31m'
@@ -19,7 +19,7 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 
 echo -e "${GREEN}========================================${NC}"
-echo -e "${GREEN}🚀 OOPBuy Spreadsheet Deployment${NC}"
+echo -e "${GREEN}🚀 CNFans Spreadsheet Deployment${NC}"
 echo -e "${GREEN}========================================${NC}"
 
 # Check if SSH key exists
@@ -110,14 +110,14 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-cd /var/www/oopbuyproducts.net
+cd /var/www/cnfansportal.com
 
 echo -e "${BLUE}📦 Installing dependencies...${NC}"
 npm install --production
 
 # Set fixed port
 echo -e "${BLUE}🔧 Using fixed port: 3001${NC}"
-PORT=3001
+PORT=3017
 echo -e "${GREEN}✅ Port configured: $PORT${NC}"
 
 # Create PM2 ecosystem file
@@ -125,10 +125,10 @@ echo -e "${BLUE}📝 Creating PM2 configuration...${NC}"
 cat > ecosystem.config.js << EOF
 module.exports = {
   apps: [{
-    name: 'oopbuyproducts',
+    name: 'cnfansportal',
     script: 'node_modules/next/dist/bin/next',
     args: 'start -p $PORT',
-    cwd: '/var/www/oopbuyproducts.net',
+    cwd: '/var/www/cnfansportal.com',
     instances: 1,
     autorestart: true,
     watch: false,
@@ -156,8 +156,8 @@ fi
 
 # Stop and delete existing process
 echo -e "${BLUE}🛑 Stopping existing process...${NC}"
-pm2 stop oopbuyproducts 2>/dev/null || echo "No existing process to stop"
-pm2 delete oopbuyproducts 2>/dev/null || echo "No existing process to delete"
+pm2 stop cnfansportal 2>/dev/null || echo "No existing process to stop"
+pm2 delete cnfansportal 2>/dev/null || echo "No existing process to delete"
 
 # Start with PM2
 echo -e "${BLUE}🚀 Starting application with PM2...${NC}"
@@ -177,7 +177,7 @@ echo -e "${GREEN}========================================${NC}"
 echo ""
 
 # Show application info
-pm2 info oopbuyproducts
+pm2 info cnfansportal
 
 echo ""
 echo -e "${BLUE}📊 Application Status:${NC}"
@@ -188,9 +188,9 @@ echo -e "${GREEN}🌐 Your application is running on port: $PORT${NC}"
 echo -e "${YELLOW}📝 Configure your Nginx/Apache to proxy to this port${NC}"
 echo ""
 echo -e "${BLUE}Useful PM2 Commands:${NC}"
-echo "  pm2 logs oopbuyproducts      - View live logs"
-echo "  pm2 restart oopbuyproducts   - Restart application"
-echo "  pm2 stop oopbuyproducts      - Stop application"
+echo "  pm2 logs cnfansportal      - View live logs"
+echo "  pm2 restart cnfansportal   - Restart application"
+echo "  pm2 stop cnfansportal      - Stop application"
 echo "  pm2 status                    - Check status"
 echo "  pm2 monit                     - Monitor resources"
 echo ""
