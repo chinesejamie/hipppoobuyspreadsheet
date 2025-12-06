@@ -3,6 +3,10 @@ import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI!;
 
+console.log('🔍 DEBUG - MONGODB_URI value:', MONGODB_URI);
+console.log('🔍 DEBUG - MONGODB_URI type:', typeof MONGODB_URI);
+console.log('🔍 DEBUG - MONGODB_URI length:', MONGODB_URI?.length);
+
 if (!MONGODB_URI) {
   throw new Error('MONGODB_URI is not defined');
 }

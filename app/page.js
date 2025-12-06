@@ -136,6 +136,17 @@ async function getProducts(searchParams) {
     ];
 
     const queryStart = DEBUG ? Date.now() : 0;
+
+    // Debug: Check collection counts
+    const db = mongoose.connection.db;
+    const collections = await db.listCollections().toArray();
+    console.log('📊 Available collections:', collections.map(c => c.name));
+
+    for (const col of collections) {
+      const count = await db.collection(col.name).countDocuments();
+      console.log(`📊 Collection "${col.name}": ${count} documents`);
+    }
+
     const results = await Product.aggregate(pipeline);
     if (DEBUG) console.log(`[SSR] Query executed in ${Date.now() - queryStart}ms`);
 
