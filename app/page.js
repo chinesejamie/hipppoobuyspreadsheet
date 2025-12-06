@@ -49,7 +49,7 @@ async function getProducts(searchParams) {
   const startTime = DEBUG ? Date.now() : 0;
 
   try {
-    await connectToDatabase();
+    const connection = await connectToDatabase();
     if (DEBUG) console.log(`[SSR] DB connected in ${Date.now() - startTime}ms`);
 
     const page = Number(searchParams.page) || 1;
@@ -138,7 +138,7 @@ async function getProducts(searchParams) {
     const queryStart = DEBUG ? Date.now() : 0;
 
     // Debug: Check collection counts
-    const db = mongoose.connection.db;
+    const db = connection.connection.db;
     const collections = await db.listCollections().toArray();
     console.log('📊 Available collections:', collections.map(c => c.name));
 
