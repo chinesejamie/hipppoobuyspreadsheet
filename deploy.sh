@@ -6,7 +6,7 @@
 set -e  # Exit on error
 
 # Configuration
-SSH_KEY="keyChina.pem"
+SSH_KEY="kRoot"
 SERVER_IP="212.227.74.41"
 REMOTE_DIR="/var/www/cnfansportal.com"
 APP_NAME="cnfansportal"
