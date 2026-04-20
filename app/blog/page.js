@@ -4,199 +4,155 @@ import { getAllArticles } from '@/lib/articles';
 import { Clock, Calendar, ArrowRight, BookOpen } from 'lucide-react';
 
 export const metadata = {
-  title: 'Shopping Guides & Tips - Learn How to Save on Chinese Shopping | MuleBuy Blog',
-  description: 'Expert guides on buying from Taobao, 1688, and Weidian. Learn how to save 50-80% on authentic products with our comprehensive shopping tutorials.',
-  keywords: 'Taobao guide, 1688 shopping, Weidian tutorial, Chinese shopping tips, how to buy from China, save money shopping',
+  title: 'HipoBuy Spreadsheet Guides — Taobao, 1688 & Weidian Shopping Tips',
+  description: 'Expert HipoBuy spreadsheet guides for buying from Taobao, 1688, and Weidian. Save 50–80% on authentic Chinese products with verified tutorials.',
+  keywords: 'hipobuy spreadsheet guide, taobao guide, 1688 shopping, weidian tutorial, chinese shopping tips, how to buy from china',
+  alternates: { canonical: 'https://hippoobuyspreadsheet.com/blog' },
   openGraph: {
-    title: 'Shopping Guides & Tips - MuleBuy Blog',
-    description: 'Expert guides on buying from Chinese platforms and saving big on authentic products',
+    title: 'HipoBuy Spreadsheet Guides — Save on Chinese Shopping',
+    description: 'Expert guides for using the HipoBuy Spreadsheet on Taobao, 1688, and Weidian.',
+    url: 'https://hippoobuyspreadsheet.com/blog',
     type: 'website',
-  }
+  },
 };
 
 export default function BlogPage() {
   const articles = getAllArticles();
 
   const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Blog",
-    "name": "MuleBuy Shopping Guides",
-    "description": "Expert guides and tips for shopping from Chinese e-commerce platforms",
-    "url": "https://cnfansportal.com/blog",
-    "publisher": {
-      "@type": "Organization",
-      "name": "MuleBuy",
-      "url": "https://cnfans.com"
-    }
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'HipoBuy Spreadsheet Guides',
+    description: 'Expert guides and tips for the HipoBuy Spreadsheet and Chinese e-commerce platforms.',
+    url: 'https://hippoobuyspreadsheet.com/blog',
+    publisher: {
+      '@type': 'Organization',
+      name: 'HipoBuy Spreadsheet',
+      url: 'https://hippoobuyspreadsheet.com',
+    },
   };
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className="min-h-screen bg-white pt-16 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-gray-600 hover:text-[#3B82F6] mb-6 transition-colors"
-            >
-              ← Back to Products
+      <main className="min-h-screen bg-white pt-16 pb-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
+          <div className="mb-10">
+            <Link href="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 mb-6 text-sm transition-colors">
+              ← Back to products
             </Link>
 
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#3B82F6]/10 rounded-full mb-4">
-              <BookOpen className="w-5 h-5 text-[#3B82F6]" />
-              <span className="text-[#3B82F6] font-semibold text-sm">Shopping Guides & Tips</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full mb-4">
+              <BookOpen className="w-4 h-4 text-gray-700" />
+              <span className="text-gray-700 font-medium text-xs uppercase tracking-wide">HipoBuy Spreadsheet Guides</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-[#3B82F6] to-blue-500 bg-clip-text text-transparent">
-              Learn to Shop Smarter
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 tracking-tight">
+              HipoBuy Spreadsheet shopping guides
             </h1>
-            <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-              Expert guides on buying from Taobao, 1688, and Weidian. Save 50-80% on authentic products with our comprehensive tutorials.
+            <p className="text-gray-600 text-base max-w-2xl leading-relaxed">
+              Practical guides for using the HipoBuy Spreadsheet to find and buy from Taobao, 1688, and Weidian safely — written for beginners and seasoned rep-shoppers.
             </p>
           </div>
 
-          {/* Featured Article */}
           {articles.length > 0 && (
             <div className="mb-12">
-              <div className="bg-white rounded-3xl shadow-2xl border-2 border-[#3B82F6]/20 overflow-hidden">
+              <article className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
                 <div className="grid md:grid-cols-2 gap-0">
-                  {/* Image */}
-                  <div className="relative h-64 md:h-full min-h-[300px] bg-gradient-to-br from-gray-100 to-gray-200">
-                    <Image
-                      src={articles[0].image}
-                      alt={articles[0].title}
-                      fill
-                      className="object-cover"
-                      priority
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-[#3B82F6] text-white rounded-full text-xs font-semibold">
-                        Featured
-                      </span>
+                  <div className="relative h-64 md:h-full min-h-[280px] bg-gray-100">
+                    <Image src={articles[0].image} alt={articles[0].title} fill className="object-cover" priority />
+                    <div className="absolute top-3 left-3">
+                      <span className="px-2.5 py-1 bg-white text-gray-900 rounded-full text-[11px] font-semibold shadow-sm">Featured</span>
                     </div>
                   </div>
 
-                  {/* Content */}
-                  <div className="p-8 lg:p-12 flex flex-col justify-center">
-                    <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
-                      <span className="px-3 py-1 bg-purple-100 text-blue-600 rounded-full font-medium">
-                        {articles[0].category}
+                  <div className="p-8 lg:p-10 flex flex-col justify-center">
+                    <div className="flex items-center gap-3 text-xs text-gray-500 mb-3 flex-wrap">
+                      <span className="px-2 py-0.5 bg-gray-100 text-gray-700 rounded-full font-medium">{articles[0].category}</span>
+                      <span className="inline-flex items-center gap-1">
+                        <Calendar className="w-3.5 h-3.5" />
+                        {new Date(articles[0].date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                       </span>
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        {new Date(articles[0].date).toLocaleDateString('en-US', {
-                          month: 'long',
-                          day: 'numeric',
-                          year: 'numeric'
-                        })}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
+                      <span className="inline-flex items-center gap-1">
+                        <Clock className="w-3.5 h-3.5" />
                         {articles[0].readTime}
-                      </div>
+                      </span>
                     </div>
 
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4 leading-tight">
-                      {articles[0].title}
+                    <h2 className="text-2xl font-bold text-gray-900 mb-3 leading-tight">
+                      <Link href={`/blog/${articles[0].slug}`} className="hover:text-blue-600 transition-colors">
+                        {articles[0].title}
+                      </Link>
                     </h2>
 
-                    <p className="text-gray-600 mb-6 leading-relaxed">
-                      {articles[0].excerpt}
-                    </p>
+                    <p className="text-gray-600 mb-5 leading-relaxed">{articles[0].excerpt}</p>
 
                     <Link
                       href={`/blog/${articles[0].slug}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#3B82F6] to-red-700 text-white rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-200 font-semibold w-fit"
+                      className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold text-sm transition-colors"
                     >
-                      Read Full Guide
-                      <ArrowRight className="w-5 h-5" />
+                      Read the full guide
+                      <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>
                 </div>
-              </div>
+              </article>
             </div>
           )}
 
-          {/* All Articles Grid */}
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">All Guides</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <section aria-labelledby="all-guides" className="mb-12">
+            <h2 id="all-guides" className="text-xl font-bold text-gray-900 mb-5">All guides</h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {articles.slice(1).map((article) => (
                 <Link
                   key={article.slug}
                   href={`/blog/${article.slug}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden hover:shadow-xl hover:border-[#3B82F6]/30 transition-all duration-300 hover:-translate-y-1"
+                  className="group bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:border-gray-300 hover:shadow-md transition-all"
                 >
-                  {/* Image */}
-                  <div className="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200">
+                  <div className="relative h-44 bg-gray-100">
                     <Image
                       src={article.image}
                       alt={article.title}
                       fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
                     />
                   </div>
-
-                  {/* Content */}
-                  <div className="p-6">
-                    <div className="flex items-center gap-3 text-xs text-gray-500 mb-3">
-                      <span className="px-2 py-1 bg-purple-100 text-blue-600 rounded-full font-medium">
-                        {article.category}
-                      </span>
-                      <div className="flex items-center gap-1">
+                  <div className="p-5">
+                    <div className="flex items-center gap-3 text-[11px] text-gray-500 mb-2 uppercase tracking-wide">
+                      <span>{article.category}</span>
+                      <span className="inline-flex items-center gap-1">
                         <Clock className="w-3 h-3" />
                         {article.readTime}
-                      </div>
+                      </span>
                     </div>
-
-                    <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-[#3B82F6] transition-colors">
+                    <h3 className="text-base font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
                       {article.title}
                     </h3>
-
-                    <p className="text-sm text-gray-600 line-clamp-2 mb-4">
-                      {article.excerpt}
-                    </p>
-
-                    <div className="flex items-center text-[#3B82F6] font-semibold text-sm">
-                      Read More
-                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                    </div>
+                    <p className="text-sm text-gray-600 line-clamp-2">{article.excerpt}</p>
                   </div>
                 </Link>
               ))}
             </div>
-          </div>
+          </section>
 
-          {/* CTA Section */}
-          <div className="bg-gradient-to-r from-[#3B82F6] via-red-700 to-blue-500 rounded-3xl p-8 sm:p-12 text-center text-white shadow-2xl">
-            <h2 className="text-3xl sm:text-4xl font-black mb-4">
-              Ready to Start Saving?
-            </h2>
-            <p className="text-white/90 text-lg mb-6 max-w-2xl mx-auto">
-              Put these guides into action! Sign up for MuleBuy and get exclusive coupon codes to save even more.
+          <aside className="bg-gray-900 rounded-2xl p-8 sm:p-10 text-center text-white">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3">Start saving on the HipoBuy Spreadsheet</h2>
+            <p className="text-gray-300 text-base mb-6 max-w-2xl mx-auto">
+              Browse 10,000+ verified products and buy through the HipoBuy shopping agent with full buyer protection.
             </p>
             <a
-              href="https://mulebuy.com/register?ref=200001570"
+              href="https://hipobuy.com/register?inviteCode=LKG2UDAUS"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#3B82F6] rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-bold text-lg"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-sm"
             >
-              Sign Up & Get Coupons
-              <ArrowRight className="w-6 h-6" />
+              Sign up with HipoBuy
+              <ArrowRight className="w-4 h-4" />
             </a>
-          </div>
+          </aside>
         </div>
-      </div>
+      </main>
     </>
   );
 }

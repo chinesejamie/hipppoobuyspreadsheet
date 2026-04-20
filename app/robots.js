@@ -7,6 +7,7 @@ export default function robots() {
         disallow: ['/api/', '/admin/'],
       },
     ],
-    sitemap: 'https://cnfansportal.com/sitemap.xml',
+    sitemap: 'https://hippoobuyspreadsheet.com/sitemap.xml',
+    host: 'https://hippoobuyspreadsheet.com',
   };
 }
