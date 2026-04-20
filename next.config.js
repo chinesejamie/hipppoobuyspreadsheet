@@ -20,15 +20,15 @@ const nextConfig = {
   },
   rewrites() {
     return [
-      { source: '/uploads/:path*', destination: 'http://212.227.74.41:4501/uploads/:path*' },
-      { source: '/assets/profilePicture/:path*', destination: 'http://212.227.74.41:4200/assets/profilePicture/:path*' },
-      { source: '/assets/productImages/:path*', destination: 'http://212.227.74.41:4200/assets/productImages/:path*' },
-      { source: '/assets/images/:path*', destination: 'http://212.227.74.41:4200/assets/images/:path*' },
+      { source: '/uploads/:path*', destination: 'http://217.154.115.9:4501/uploads/:path*' },
+      { source: '/assets/images/:path*', destination: 'http://217.154.115.9:4501/assets/images/:path*' },
+      { source: '/assets/productImages/:path*', destination: 'http://217.154.115.9:4501/assets/productImages/:path*' },
+      { source: '/assets/profilePicture/:path*', destination: 'http://217.154.115.9:4501/assets/profilePicture/:path*' },
     ];
   },
   env: {
-    AGENT_NAME: process.env.AGENT_NAME || 'CNFans',
-    INVITE_URL: process.env.INVITE_URL || 'https://cnfans.com/register?ref=137664',
+    AGENT_NAME: process.env.AGENT_NAME || 'MuleBuy',
+    INVITE_URL: process.env.INVITE_URL || 'https://mulebuy.com/register?ref=200001570',
     DEBUG_MODE: process.env.DEBUG_MODE || 'false',
   },
 };

@@ -22,7 +22,7 @@ export default function Pagination({ currentPage, hasMore, productsCount }) {
       overlay.className = 'fixed inset-0 bg-white/80 backdrop-blur-sm z-50 flex items-center justify-center';
       overlay.innerHTML = `
         <div class="text-center">
-          <div class="inline-block animate-spin rounded-full h-16 w-16 border-4 border-[#C92910] border-t-transparent mb-4"></div>
+          <div class="inline-block animate-spin rounded-full h-16 w-16 border-4 border-[#3B82F6] border-t-transparent mb-4"></div>
           <p class="text-xl font-bold text-gray-900">Loading Page ${newPage}...</p>
           <p class="text-sm text-gray-600 mt-2">Please wait</p>
         </div>
@@ -53,14 +53,14 @@ export default function Pagination({ currentPage, hasMore, productsCount }) {
   return (
     <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 bg-white/80 backdrop-blur-lg rounded-xl sm:rounded-2xl shadow-lg border border-gray-200 p-3 sm:p-4 md:p-6">
       <div className="text-xs sm:text-sm text-gray-600">
-        Showing <span className="font-bold text-[#C92910]">{productsCount}</span> products on page <span className="font-bold">{currentPage}</span>
+        Showing <span className="font-bold text-[#3B82F6]">{productsCount}</span> products on page <span className="font-bold">{currentPage}</span>
       </div>
 
       <div className="flex gap-2">
         <button
           onClick={() => handlePageChange(currentPage - 1, 'prev')}
           disabled={currentPage === 1 || clickedButton}
-          className="group inline-flex items-center gap-2 px-3 sm:px-5 py-3 bg-gradient-to-r from-[#C92910] to-red-700 text-white rounded-xl hover:shadow-2xl hover:scale-105 hover:from-pink-600 hover:to-[#C92910] disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none active:scale-95 transition-all duration-300 font-semibold text-sm sm:text-base"
+          className="group inline-flex items-center gap-2 px-3 sm:px-5 py-3 bg-gradient-to-r from-[#3B82F6] to-red-700 text-white rounded-xl hover:shadow-2xl hover:scale-105 hover:from-pink-600 hover:to-[#3B82F6] disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none active:scale-95 transition-all duration-300 font-semibold text-sm sm:text-base"
         >
           {clickedButton === 'prev' ? (
             <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
@@ -71,9 +71,9 @@ export default function Pagination({ currentPage, hasMore, productsCount }) {
           <span className="sm:hidden">Prev</span>
         </button>
 
-        <div className={`flex items-center px-3 sm:px-6 py-3 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl border-2 border-[#C92910]/20 shadow-md transition-all ${clickedButton ? 'animate-pulse' : ''}`}>
+        <div className={`flex items-center px-3 sm:px-6 py-3 bg-gradient-to-r from-blue-100 to-pink-100 rounded-xl border-2 border-[#3B82F6]/20 shadow-md transition-all ${clickedButton ? 'animate-pulse' : ''}`}>
           {clickedButton ? (
-            <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin text-[#C92910] mr-2" />
+            <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin text-[#3B82F6] mr-2" />
           ) : null}
           <span className="font-bold text-gray-700 text-sm sm:text-base">Page {currentPage}</span>
         </div>
@@ -81,7 +81,7 @@ export default function Pagination({ currentPage, hasMore, productsCount }) {
         <button
           onClick={() => handlePageChange(currentPage + 1, 'next')}
           disabled={!hasMore || clickedButton}
-          className="group inline-flex items-center gap-2 px-3 sm:px-5 py-3 bg-gradient-to-r from-[#C92910] to-red-700 text-white rounded-xl hover:shadow-2xl hover:scale-105 hover:from-pink-600 hover:to-[#C92910] disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none active:scale-95 transition-all duration-300 font-semibold text-sm sm:text-base"
+          className="group inline-flex items-center gap-2 px-3 sm:px-5 py-3 bg-gradient-to-r from-[#3B82F6] to-red-700 text-white rounded-xl hover:shadow-2xl hover:scale-105 hover:from-pink-600 hover:to-[#3B82F6] disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none active:scale-95 transition-all duration-300 font-semibold text-sm sm:text-base"
         >
           <span className="sm:hidden">Next</span>
           <span className="hidden sm:inline">Next</span>

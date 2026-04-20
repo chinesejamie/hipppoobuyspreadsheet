@@ -48,7 +48,7 @@ export async function GET(request) {
     }
 
     try {
-      product.link = convertToCNFans(product.id, product.store);
+      product.link = convertToMuleBuy(product.id, product.store);
     } catch (error) {
       console.error("Link conversion error:", error.message);
     }
@@ -63,10 +63,15 @@ export async function GET(request) {
   }
 }
 
-function convertToCNFans(id, platform) {
-  const inviteCode = '137664';
+function convertToHipoBuy(id, platform) {
+  const inviteCode = 'LKG2UDAUS';
   const platformId = getPlatformId(platform);
-  return processToCNFans(platformId, id, inviteCode);
+  return processToHipoBuy(platformId, id, inviteCode);
+}
+
+// Alias for backwards compatibility
+function convertToMuleBuy(id, platform) {
+  return convertToHipoBuy(id, platform);
 }
 
 function getPlatformId(platform) {
@@ -78,21 +83,28 @@ function getPlatformId(platform) {
     case 'Weidian':
       return 2;
     default:
-      throw new Error("Unknown platform");
+      return 1; // Default to Taobao
   }
 }
 
-function processToCNFans(platformId, productId, inviteCode) {
+// Format: https://hipobuy.com/product/{platform}/{productId}?inviteCode=xxx
+// Platform: 0 = 1688, 1 = Taobao, weidian = Weidian
+function processToHipoBuy(platformId, productId, inviteCode) {
+  let platformPath;
   switch (platformId) {
-    case 0:
-      return `https://cnfans.com/product/?shop_type=ali_1688&id=${productId}&ref=${inviteCode}`;
-    case 1:
-      return `https://cnfans.com/product/?shop_type=taobao&id=${productId}&ref=${inviteCode}`;
-    case 2:
-      return `https://cnfans.com/product/?shop_type=weidian&id=${productId}&ref=${inviteCode}`;
+    case 0: // 1688
+      platformPath = '0';
+      break;
+    case 1: // Taobao
+      platformPath = '1';
+      break;
+    case 2: // Weidian
+      platformPath = 'weidian';
+      break;
     default:
-      return '';
+      platformPath = '1';
   }
+  return `https://hipobuy.com/product/${platformPath}/${productId}?inviteCode=${inviteCode}`;
 }
 
 const convertPrice = (price, targetCurrency) => {

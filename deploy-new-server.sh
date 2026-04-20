@@ -1,8 +1,8 @@
 #!/bin/bash
 # ========================================
-# CNFans Portal - Complete Deployment Script
+# HipoBuy Spreadsheet - Complete Deployment Script
 # New Server: 217.154.115.9
-# Domain: cnfansportal.com
+# Domain: hipobuyspreadsheet.com
 # ========================================
 
 set -e  # Exit on error
@@ -12,10 +12,10 @@ set -e  # Exit on error
 # --------------------------
 SSH_KEY="/Users/asiger/Desktop/RootKey"
 SERVER_IP="217.154.115.9"
-DOMAIN="cnfansportal.com"
-REMOTE_DIR="/var/www/cnfansportal.com"
-APP_NAME="cnfansportal"
-PORT=3002
+DOMAIN="hipobuyspreadsheet.com"
+REMOTE_DIR="/var/www/hipobuyspreadsheet.com"
+APP_NAME="hipobuyspreadsheet"
+PORT=3028
 
 # Colors
 RED='\033[0;31m'
@@ -26,7 +26,7 @@ CYAN='\033[0;36m'
 NC='\033[0m'
 
 echo -e "${GREEN}========================================${NC}"
-echo -e "${GREEN}🚀 CNFans Portal Deployment${NC}"
+echo -e "${GREEN}🚀 HipoBuy Spreadsheet Deployment${NC}"
 echo -e "${GREEN}========================================${NC}"
 echo -e "${CYAN}Server: ${SERVER_IP}${NC}"
 echo -e "${CYAN}Domain: ${DOMAIN}${NC}"
@@ -57,33 +57,17 @@ echo -e "${GREEN}✅ SSH connection verified${NC}"
 echo ""
 
 # --------------------------
-# Step 2: Git commit & push
+# Step 2: Build locally
 # --------------------------
-echo -e "${YELLOW}🔄 Step 2: Git commit & push${NC}"
-if [[ -n $(git status -s) ]]; then
-  echo -e "${BLUE}📝 Changes detected, committing...${NC}"
-  git add .
-  TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
-  git commit -m "Deploy to new server: $TIMESTAMP"
-  git push
-  echo -e "${GREEN}✅ Git push complete${NC}"
-else
-  echo -e "${BLUE}ℹ️  No changes to commit${NC}"
-fi
-echo ""
-
-# --------------------------
-# Step 3: Build locally
-# --------------------------
-echo -e "${YELLOW}📦 Step 3: Building project locally...${NC}"
+echo -e "${YELLOW}📦 Step 2: Building project locally...${NC}"
 npm run build
 echo -e "${GREEN}✅ Build complete${NC}"
 echo ""
 
 # --------------------------
-# Step 4: Prepare deployment files
+# Step 3: Prepare deployment files
 # --------------------------
-echo -e "${YELLOW}📋 Step 4: Preparing files for upload...${NC}"
+echo -e "${YELLOW}📋 Step 3: Preparing files for upload...${NC}"
 TEMP_DIR=$(mktemp -d)
 echo -e "${BLUE}Temp directory: $TEMP_DIR${NC}"
 
@@ -116,9 +100,9 @@ echo -e "${GREEN}✅ Files prepared${NC}"
 echo ""
 
 # --------------------------
-# Step 5: Upload to server
+# Step 4: Upload to server
 # --------------------------
-echo -e "${YELLOW}📤 Step 5: Uploading to server...${NC}"
+echo -e "${YELLOW}📤 Step 4: Uploading to server...${NC}"
 ssh -i "$SSH_KEY" root@"$SERVER_IP" "mkdir -p $REMOTE_DIR"
 
 rsync -avz --progress -e "ssh -i $SSH_KEY" \
@@ -130,9 +114,9 @@ echo -e "${GREEN}✅ Upload complete${NC}"
 echo ""
 
 # --------------------------
-# Step 6: Setup & run on server
+# Step 5: Setup & run on server
 # --------------------------
-echo -e "${YELLOW}🔧 Step 6: Setting up server environment...${NC}"
+echo -e "${YELLOW}🔧 Step 5: Setting up server environment...${NC}"
 
 ssh -t -i "$SSH_KEY" root@"$SERVER_IP" bash <<ENDSSH
 set -e
@@ -243,7 +227,7 @@ echo -e "\${GREEN}✅ PM2 config created\${NC}"
 echo -e "\${BLUE}🌐 Configuring Nginx...\${NC}"
 
 cat > /etc/nginx/sites-available/\$DOMAIN << 'NGINXEOF'
-# HTTP - Redirect to HTTPS
+# HTTP server - certbot will add HTTPS configuration
 server {
     listen 80;
     listen [::]:80;
@@ -253,22 +237,6 @@ server {
     location /.well-known/acme-challenge/ {
         root /var/www/html;
     }
-
-    # Redirect all HTTP to HTTPS
-    location / {
-        return 301 https://\$host\$request_uri;
-    }
-}
-
-# HTTPS
-server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-    server_name $DOMAIN www.$DOMAIN;
-
-    # SSL Configuration (will be added by certbot)
-    # ssl_certificate /etc/letsencrypt/live/$DOMAIN/fullchain.pem;
-    # ssl_certificate_key /etc/letsencrypt/live/$DOMAIN/privkey.pem;
 
     # Security Headers
     add_header X-Frame-Options "SAMEORIGIN" always;

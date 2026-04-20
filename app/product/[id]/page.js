@@ -6,7 +6,7 @@ import { extractIdFromSlug } from '@/lib/slugify';
 import BackButton from '@/components/BackButton';
 import ProductImageGallery from '@/components/ProductImageGallery';
 import BuyNowButton from '@/components/BuyNowButton';
-import { convertToCNFans, currencySymbols, conversionRates } from '@/lib/productUtils';
+import { convertToMuleBuy, currencySymbols, conversionRates } from '@/lib/productUtils';
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }) {
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
 
     if (!product) {
       return {
-        title: 'Product Not Found - CNFans',
+        title: 'Product Not Found - HipoBuy',
         description: 'The product you are looking for could not be found.'
       };
     }
@@ -30,15 +30,15 @@ export async function generateMetadata({ params }) {
     const imageUrl = validImages[0] || null;
 
     return {
-      title: `${product.name} - ${product.category || 'Product'} | CNFans Spreadsheet`,
+      title: `${product.name} - ${product.category || 'Product'} | HipoBuy Spreadsheet`,
       description: product.description || `Buy ${product.name} from ${product.store || 'Chinese shopping platforms'}. Best deals on authentic products.`,
-      keywords: `${product.name}, ${product.category}, ${product.store}, Chinese shopping, CNFans, buy online, cheap deals`,
+      keywords: `${product.name}, ${product.category}, ${product.store}, Chinese shopping, HipoBuy, buy online, cheap deals`,
       openGraph: {
         title: product.name,
         description: product.description || `Buy ${product.name} from ${product.store}`,
         ...(imageUrl && { images: [imageUrl] }),
         type: 'website',
-        siteName: 'CNFans Spreadsheet',
+        siteName: 'HipoBuy Spreadsheet',
       },
       twitter: {
         card: 'summary_large_image',
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }) {
     };
   } catch (error) {
     return {
-      title: 'Product - CNFans',
+      title: 'Product - HipoBuy',
       description: 'Find the best deals on Chinese shopping platforms'
     };
   }
@@ -112,17 +112,17 @@ export default async function ProductPage({ params, searchParams }) {
     "description": product.description || `Buy ${product.name}`,
     "brand": {
       "@type": "Brand",
-      "name": product.store || "CNFans"
+      "name": product.store || "HipoBuy"
     },
     "offers": {
       "@type": "Offer",
-      "url": `https://cnfansportal.com/product/${product._id}`,
+      "url": `https://hipobuyspreadsheet.com/product/${product._id}`,
       "priceCurrency": "CNY",
       "price": product.price,
       "availability": "https://schema.org/InStock",
       "seller": {
         "@type": "Organization",
-        "name": product.creatorName || "CNFans"
+        "name": product.creatorName || "HipoBuy"
       }
     },
     "category": product.category
@@ -158,7 +158,7 @@ export default async function ProductPage({ params, searchParams }) {
                 {/* Badges */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {product.category && (
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#C92910]/10 text-[#C92910] rounded-full text-sm font-semibold">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#3B82F6]/10 text-[#3B82F6] rounded-full text-sm font-semibold">
                       <Tag className="w-3.5 h-3.5" />
                       {product.category}
                     </span>
@@ -184,8 +184,8 @@ export default async function ProductPage({ params, searchParams }) {
                 {/* Creator */}
                 {product.creatorName && (
                   <div className="flex items-center gap-2 mt-4 pt-4 border-t border-gray-100">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#C92910]/10">
-                      <User className="w-4 h-4 text-[#C92910]" />
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#3B82F6]/10">
+                      <User className="w-4 h-4 text-[#3B82F6]" />
                     </div>
                     <div>
                       <p className="text-xs text-gray-500">Listed by</p>
@@ -196,13 +196,13 @@ export default async function ProductPage({ params, searchParams }) {
               </div>
 
               {/* Price Card */}
-              <div className="bg-gradient-to-br from-[#C92910]/5 via-purple-50 to-pink-50 rounded-2xl shadow-lg border-2 border-[#C92910]/20 p-6">
+              <div className="bg-gradient-to-br from-[#3B82F6]/5 via-purple-50 to-pink-50 rounded-2xl shadow-lg border-2 border-[#3B82F6]/20 p-6">
                 <h3 className="text-sm font-semibold text-gray-600 mb-4 uppercase tracking-wide">Pricing</h3>
                 <div className="space-y-3">
                   {Object.entries(conversionRates).map(([curr, rate]) => (
                     <div key={curr} className="flex justify-between items-center">
                       <span className="text-gray-700 font-medium">{curr}</span>
-                      <span className="text-2xl font-bold text-[#C92910]">
+                      <span className="text-2xl font-bold text-[#3B82F6]">
                         {currencySymbols[curr]}{(product.price * rate).toFixed(2)}
                       </span>
                     </div>
@@ -219,7 +219,7 @@ export default async function ProductPage({ params, searchParams }) {
                     category: product.category,
                     price: product.price
                   }}
-                  href={convertToCNFans(product.id, product.store)}
+                  href={convertToMuleBuy(product.id, product.store)}
                 />
               ) : (
                 <div className="w-full text-center py-4 bg-gray-100 rounded-xl text-gray-500 font-medium">
@@ -230,7 +230,7 @@ export default async function ProductPage({ params, searchParams }) {
               {/* Product Details Card */}
               <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <Info className="w-5 h-5 text-[#C92910]" />
+                  <Info className="w-5 h-5 text-[#3B82F6]" />
                   <h3 className="font-bold text-gray-900">Product Details</h3>
                 </div>
                 <div className="space-y-3">
@@ -252,7 +252,7 @@ export default async function ProductPage({ params, searchParams }) {
           </div>
 
           {/* Signup CTA Banner */}
-          <div className="mt-8 bg-gradient-to-r from-[#C92910] via-red-700 to-purple-600 rounded-2xl shadow-2xl border-2 border-pink-300 p-6 sm:p-8 text-center overflow-hidden relative">
+          <div className="mt-8 bg-gradient-to-r from-[#3B82F6] via-red-700 to-blue-500 rounded-2xl shadow-2xl border-2 border-pink-300 p-6 sm:p-8 text-center overflow-hidden relative">
             <div className="absolute top-0 left-0 w-full h-full opacity-10">
               <div className="absolute top-4 left-4">
                 <Sparkles className="w-12 h-12 text-white animate-pulse" />
@@ -269,10 +269,10 @@ export default async function ProductPage({ params, searchParams }) {
                 Sign up now and get exclusive coupon codes to save even more on this product and thousands of others!
               </p>
               <a
-                href="https://cnfans.com/register?ref=137664"
+                href="https://hipobuy.com/register?inviteCode=LKG2UDAUS"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#C92910] rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-bold text-lg"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#3B82F6] rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-bold text-lg"
               >
                 <Gift className="w-6 h-6" />
                 Get Your Coupons Now!
@@ -287,12 +287,12 @@ export default async function ProductPage({ params, searchParams }) {
             <div className="prose prose-gray max-w-none">
               <p className="text-gray-600 leading-relaxed mb-4">
                 Looking to buy <strong>{product.name}</strong>? You've found the right place! This product is available through
-                trusted Chinese shopping platforms including {product.store || '1688, Taobao, and Weidian'}. CNFans Spreadsheet
+                trusted Chinese shopping platforms including {product.store || '1688, Taobao, and Weidian'}. HipoBuy Spreadsheet
                 helps you discover authentic products at the best prices directly from Chinese suppliers.
               </p>
               <p className="text-gray-600 leading-relaxed">
                 This {product.category || 'product'} is carefully curated and listed by {product.creatorName || 'our team'},
-                ensuring you get quality products at competitive prices. Shop with confidence using our affiliate link to CNFans,
+                ensuring you get quality products at competitive prices. Shop with confidence using our affiliate link to HipoBuy,
                 your trusted shopping agent for Chinese platforms.
               </p>
             </div>

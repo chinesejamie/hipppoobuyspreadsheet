@@ -6,7 +6,7 @@ import HowItWorks from '@/components/HowItWorks';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import BlogPreview from '@/components/BlogPreview';
 import FAQ from '@/components/FAQ';
-import { Gift, Sparkles } from 'lucide-react';
+import { Zap, Shield, Truck, Star, TrendingUp, Users, Package, ArrowRight, Sparkles, Crown } from 'lucide-react';
 import connectToDatabase from '@/lib/mongodb';
 import Product from '@/models/Product';
 
@@ -16,8 +16,8 @@ export const fetchCache = 'force-no-store';
 
 // Generate metadata for SEO
 export const metadata = {
-  title: "CNFans Spreadsheet - Official Product Database | Taobao, 1688, Weidian Shopping",
-  description: "Official CNFans Spreadsheet with 1000+ curated Chinese products. Browse our comprehensive CNFans spreadsheet database with prices, reviews, and direct purchase links. Save 50-80% on authentic products.",
+  title: "HipoBuy Spreadsheet 2025 - Best Chinese Product Database | Taobao, 1688, Weidian Deals",
+  description: "Discover the #1 HipoBuy Spreadsheet with 10,000+ curated products from Taobao, 1688 & Weidian. Save 50-80% on authentic Chinese products. Updated daily with the best deals and direct purchase links.",
 };
 
 // Fetch categories - cached for 10 minutes
@@ -27,7 +27,6 @@ const CATEGORIES_CACHE_TTL = 10 * 60 * 1000; // 10 minutes
 
 async function getCategories() {
   try {
-    // Return cached categories if still valid
     if (categoriesCache && Date.now() - categoriesCacheTime < CATEGORIES_CACHE_TTL) {
       return categoriesCache;
     }
@@ -53,8 +52,6 @@ async function getProducts(searchParams) {
     if (DEBUG) console.log(`[SSR] DB connected in ${Date.now() - startTime}ms`);
 
     const page = Number(searchParams.page) || 1;
-
-    // Security: Enforce maximum limit of 100
     const requestedLimit = Number(process.env.PRODUCTS_PER_PAGE) || 100;
     const MAX_LIMIT = 100;
     const limit = Math.min(requestedLimit, MAX_LIMIT);
@@ -62,7 +59,6 @@ async function getProducts(searchParams) {
     const search = searchParams.search || '';
     const category = searchParams.category || 'all';
 
-    // Build query
     const mongoQuery = {};
 
     if (search) {
@@ -79,11 +75,10 @@ async function getProducts(searchParams) {
       mongoQuery.category = category;
     }
 
-    // Get page ID for boosts
-    const pageId = '692d53b66be92af615b19149';
+    // Get page IDs for boosts (support both CNFans and HipoBuy pages)
+    const pageIds = ['692d53b66be92af615b19149', '6938616f524b069ebb531ad6'];
     const now = new Date();
 
-    // Aggregation pipeline with boost calculation
     const pipeline = [
       { $match: mongoQuery },
       {
@@ -97,7 +92,7 @@ async function getProducts(searchParams) {
                     as: 'b',
                     cond: {
                       $and: [
-                        { $eq: ['$$b.boostPage', pageId] },
+                        { $in: ['$$b.boostPage', pageIds] },
                         { $gt: ['$$b.validUntil', now] }
                       ]
                     }
@@ -119,7 +114,7 @@ async function getProducts(searchParams) {
         }
       },
       { $skip: (page - 1) * limit },
-      { $limit: limit + 1 }, // Fetch one extra to check if there are more pages
+      { $limit: limit + 1 },
       {
         $project: {
           _id: 1,
@@ -135,20 +130,7 @@ async function getProducts(searchParams) {
       }
     ];
 
-    const queryStart = DEBUG ? Date.now() : 0;
-
-    // Debug: Check collection counts
-    const db = connection.connection.db;
-    const collections = await db.listCollections().toArray();
-    console.log('📊 Available collections:', collections.map(c => c.name));
-
-    for (const col of collections) {
-      const count = await db.collection(col.name).countDocuments();
-      console.log(`📊 Collection "${col.name}": ${count} documents`);
-    }
-
     const results = await Product.aggregate(pipeline);
-    if (DEBUG) console.log(`[SSR] Query executed in ${Date.now() - queryStart}ms`);
 
     const hasMore = results.length > limit;
     const products = results.slice(0, limit).map(p => ({
@@ -171,152 +153,185 @@ async function getProducts(searchParams) {
   }
 }
 
-// Helper functions are now in lib/productUtils.js and imported by components
-
 export default async function Home({ searchParams }) {
-  const DEBUG = process.env.DEBUG_MODE === 'true';
-  const pageStart = DEBUG ? Date.now() : 0;
-
   const resolvedParams = await searchParams;
 
-  // Fetch categories and products in parallel for better performance
   const [categories, { products, hasMore, page }] = await Promise.all([
     getCategories(),
     getProducts(resolvedParams)
   ]);
 
-  // Ensure currency is always a valid string, never empty or undefined
   const currency = resolvedParams.currency?.trim() || 'USD';
   const search = resolvedParams.search || '';
   const category = resolvedParams.category || 'all';
 
-  if (DEBUG) {
-    console.log('[SSR Page] Total render time:', Date.now() - pageStart, 'ms');
-    console.log('[SSR Page] Currency:', currency, 'Products:', products.length);
-  }
-
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#fafafa]">
+      {/* SEO Backlinks - Hidden but crawlable */}
+      <nav className="seo-links" aria-label="Partner sites">
+        <a href="https://oopbuysheet.com" title="OopBuy Sheet - Chinese Shopping Spreadsheet">OopBuy Spreadsheet</a>
+        <a href="https://oopbuyspreadsheet.com" title="OopBuy Spreadsheet - Best Taobao Deals">OopBuy Product Database</a>
+        <a href="https://orientdigfinds.com" title="Orient Dig Finds - Chinese Product Discovery">Orient Dig Finds</a>
+        <a href="https://kakobuy-spreadsheet.com" title="KakoBuy Spreadsheet - 1688 Weidian Products">KakoBuy Spreadsheet</a>
+        <a href="https://cnfansportal.com" title="CNFans Portal - Chinese Shopping Agent">CNFans Portal Spreadsheet</a>
+      </nav>
+
       <div className="pt-16">
-        {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-gray-50 to-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 text-center">
-            {/* Announcement Badge */}
-            <div className="flex justify-center mb-6">
-              <a
-                href="https://cnfans.com/register?ref=137664"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 px-4 sm:px-5 py-2 bg-[#C92910]/10 hover:bg-[#C92910]/15 rounded-full transition-all duration-300"
-              >
-                <Gift className="w-4 h-4 text-[#C92910]" />
-                <span className="text-sm font-semibold text-[#C92910]">
-                  Get Exclusive Coupons
-                </span>
-                <Sparkles className="w-4 h-4 text-[#C92910] group-hover:rotate-12 transition-transform" />
-              </a>
+        {/* Hero Section - Completely New Design */}
+        <section className="relative overflow-hidden bg-[#16213e] min-h-[90vh] flex items-center">
+          {/* Animated background */}
+          <div className="absolute inset-0 gradient-bg opacity-90"></div>
+
+          {/* Grid pattern overlay */}
+          <div className="absolute inset-0 grid-pattern opacity-30"></div>
+
+          {/* Floating shapes */}
+          <div className="absolute top-20 left-10 w-72 h-72 bg-[#3B82F6] rounded-full filter blur-[120px] opacity-30 float"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#e94560] rounded-full filter blur-[150px] opacity-20 float" style={{animationDelay: '-3s'}}></div>
+
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center z-10">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 mb-8">
+              <Crown className="w-4 h-4 text-yellow-400" />
+              <span className="text-sm font-medium text-white">2025 Best HipoBuy Spreadsheet</span>
+              <Sparkles className="w-4 h-4 text-yellow-400" />
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-gray-900 mb-4 sm:mb-6">
-              <span className="bg-gradient-to-r from-[#C92910] via-red-700 to-purple-600 bg-clip-text text-transparent">
-                CNFans Spreadsheet
-              </span>
-              <br />
-              <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
-                Best Chinese Shopping Products
-              </span>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white mb-6 tracking-tight">
+              <span className="block">HipoBuy</span>
+              <span className="text-gradient">Spreadsheet</span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
-              The ultimate CNFans product spreadsheet with curated items from Taobao, 1688, and Weidian.
-              Save 50-80% on authentic Chinese products with direct shipping worldwide.
+            <p className="text-xl sm:text-2xl text-white/80 max-w-3xl mx-auto mb-10 leading-relaxed">
+              The ultimate <strong className="text-[#e94560]">HipoBuy spreadsheet</strong> with 10,000+ verified products from
+              Taobao, 1688 & Weidian. Save up to <strong className="text-[#00d9a5]">80%</strong> on authentic Chinese products.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
               <a
-                href="https://cnfans.com/register?ref=137664"
+                href="https://hipobuy.com/register?inviteCode=LKG2UDAUS"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#C92910] hover:bg-[#C92910]/90 text-white rounded-full font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-200"
+                className="group btn-primary px-10 py-5 text-white rounded-2xl font-bold text-lg inline-flex items-center gap-3 pulse-glow"
               >
-                Sign Up Free
+                <Zap className="w-5 h-5" />
+                Get Started Free
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
                 href="#products"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white hover:bg-gray-50 text-gray-900 rounded-full font-semibold text-base border-2 border-gray-200 transition-all duration-200"
+                className="px-10 py-5 bg-white/10 backdrop-blur-md text-white rounded-2xl font-bold text-lg border border-white/30 hover:bg-white/20 transition-all inline-flex items-center gap-2"
               >
+                <Package className="w-5 h-5" />
                 Browse Products
               </a>
             </div>
 
-            {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-sm text-gray-600">
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="font-medium">1M+ Products</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="font-medium">200+ Countries</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="font-medium">24/7 Support</span>
-              </div>
+            {/* Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+              {[
+                { value: '10K+', label: 'Products', icon: Package },
+                { value: '50-80%', label: 'Savings', icon: TrendingUp },
+                { value: '200+', label: 'Countries', icon: Truck },
+                { value: '24/7', label: 'Support', icon: Users },
+              ].map((stat, index) => (
+                <div key={index} className="glass rounded-2xl p-6 text-center">
+                  <stat.icon className="w-8 h-8 text-[#3B82F6] mx-auto mb-2" />
+                  <div className="text-3xl font-black text-[#16213e]">{stat.value}</div>
+                  <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Scroll indicator */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center pt-2">
+              <div className="w-1.5 h-3 bg-white/80 rounded-full"></div>
+            </div>
+          </div>
+        </section>
+
+        {/* Trust Bar */}
+        <section className="bg-white border-b border-gray-100">
+          <div className="max-w-7xl mx-auto px-4 py-6">
+            <div className="flex flex-wrap items-center justify-center gap-8 text-gray-500 text-sm">
+              <span className="font-semibold text-gray-700">Trusted platforms:</span>
+              <span className="flex items-center gap-2"><span className="w-2 h-2 bg-orange-500 rounded-full"></span>Taobao</span>
+              <span className="flex items-center gap-2"><span className="w-2 h-2 bg-red-500 rounded-full"></span>1688</span>
+              <span className="flex items-center gap-2"><span className="w-2 h-2 bg-blue-500 rounded-full"></span>Weidian</span>
+              <span className="flex items-center gap-2"><span className="w-2 h-2 bg-green-500 rounded-full"></span>Secure Payments</span>
+              <span className="flex items-center gap-2"><span className="w-2 h-2 bg-blue-400 rounded-full"></span>Buyer Protection</span>
             </div>
           </div>
         </section>
 
         {/* SEO Content Section */}
-        <section className="bg-white border-b border-gray-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="text-center max-w-4xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-                What is the CNFans Spreadsheet?
+        <section className="bg-gradient-to-b from-white to-gray-50 py-16">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-12">
+              <span className="inline-block px-4 py-1 bg-[#3B82F6]/10 text-[#3B82F6] rounded-full text-sm font-semibold mb-4">
+                ABOUT HIPOBUY SPREADSHEET
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-black text-[#16213e] mb-6">
+                The Ultimate HipoBuy Spreadsheet Database
               </h2>
-              <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-6">
-                The <strong>CNFans Spreadsheet</strong> is your comprehensive product database for finding the best deals on Chinese shopping platforms.
-                Our curated <strong>CNFans product spreadsheet</strong> features thousands of verified items from <strong>Taobao</strong>, <strong>1688</strong>, and <strong>Weidian</strong>,
-                all organized with prices, categories, and direct purchase links. Browse our <strong>CNFans spreadsheet</strong> to discover authentic Chinese products
-                at wholesale prices with worldwide shipping through CNFans's trusted service.
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                The <strong>HipoBuy Spreadsheet</strong> is your comprehensive guide to the best deals on Chinese e-commerce platforms.
+                Our expertly curated <strong>HipoBuy product spreadsheet</strong> features verified products from <strong>Taobao</strong>, <strong>1688</strong>, and <strong>Weidian</strong>,
+                complete with pricing, seller ratings, and direct purchase links through HipoBuy.
               </p>
-              <div className="grid sm:grid-cols-3 gap-6 text-left">
-                <div className="p-4 bg-gray-50 rounded-xl">
-                  <h3 className="font-bold text-gray-900 mb-2">📊 Comprehensive Database</h3>
-                  <p className="text-sm text-gray-600">Our CNFans spreadsheet includes detailed product information, pricing, and seller ratings for easy comparison.</p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: Star,
+                  title: 'Curated Selection',
+                  description: 'Every product is hand-picked and verified by our team. Only the best deals make it to our HipoBuy spreadsheet database.',
+                  color: 'from-yellow-400 to-orange-500'
+                },
+                {
+                  icon: Shield,
+                  title: 'Buyer Protection',
+                  description: 'Shop with confidence knowing every purchase is protected. Quality inspections and secure payments guaranteed through HipoBuy.',
+                  color: 'from-[#3B82F6] to-[#e94560]'
+                },
+                {
+                  icon: Truck,
+                  title: 'Global Shipping',
+                  description: 'Fast delivery to 200+ countries. Multiple shipping options from express to economy to fit your needs.',
+                  color: 'from-[#00d9a5] to-teal-500'
+                }
+              ].map((feature, index) => (
+                <div key={index} className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 card-hover">
+                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6`}>
+                    <feature.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[#16213e] mb-3">{feature.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
                 </div>
-                <div className="p-4 bg-gray-50 rounded-xl">
-                  <h3 className="font-bold text-gray-900 mb-2">🔍 Easy Search & Filter</h3>
-                  <p className="text-sm text-gray-600">Find exactly what you need in the CNFans product spreadsheet with advanced search and category filters.</p>
-                </div>
-                <div className="p-4 bg-gray-50 rounded-xl">
-                  <h3 className="font-bold text-gray-900 mb-2">🛒 Direct Purchase Links</h3>
-                  <p className="text-sm text-gray-600">Every item in our CNFans spreadsheet includes a direct link to purchase through CNFans with your invite code.</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Products Section */}
-        <section id="products" className="bg-white">
-          <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-            {/* Products Header */}
-            <div className="text-center mb-8">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
-                Browse the CNFans Spreadsheet
+        <section id="products" className="bg-gray-50 py-16">
+          <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Section Header */}
+            <div className="text-center mb-12">
+              <span className="inline-block px-4 py-1 bg-[#e94560]/10 text-[#e94560] rounded-full text-sm font-semibold mb-4">
+                PRODUCT CATALOG
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-black text-[#16213e] mb-4">
+                Browse Our Collection
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Explore our complete CNFans product spreadsheet with {products.length}+ curated items updated daily
+                Explore {products.length}+ verified products updated daily. Find the best deals from Chinese platforms.
               </p>
             </div>
 
@@ -330,16 +345,16 @@ export default async function Home({ searchParams }) {
 
             {/* Products Grid */}
             {products.length === 0 ? (
-              <div className="text-center py-20">
-                <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
-                  <span className="text-4xl">🔍</span>
+              <div className="text-center py-20 bg-white rounded-3xl shadow-sm">
+                <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#3B82F6]/20 to-[#e94560]/20 flex items-center justify-center">
+                  <Package className="w-12 h-12 text-[#3B82F6]" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">No products found</h3>
+                <h3 className="text-2xl font-bold text-[#16213e] mb-2">No products found</h3>
                 <p className="text-gray-600 mb-6">Try adjusting your filters or search terms</p>
               </div>
             ) : (
               <>
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-6 mb-8">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 mb-8">
                   {products.map((product, index) => (
                     <ProductCard
                       key={product._id || index}
@@ -349,7 +364,6 @@ export default async function Home({ searchParams }) {
                   ))}
                 </div>
 
-                {/* Pagination */}
                 <Pagination currentPage={page} hasMore={hasMore} productsCount={products.length} />
               </>
             )}
@@ -364,71 +378,102 @@ export default async function Home({ searchParams }) {
           <FAQ />
         </div>
 
-        {/* Footer */}
-        <footer className="bg-gray-50 border-t border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            {/* Final CTA */}
-            <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                Ready to start saving?
-              </h2>
-              <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
-                Join thousands of shoppers getting authentic products at 50-80% off retail prices.
-              </p>
-              <a
-                href="https://cnfans.com/register?ref=137664"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#C92910] hover:bg-[#C92910]/90 text-white rounded-full font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-200"
-              >
-                <Gift className="w-5 h-5" />
-                Get Your Coupons Now
+        {/* Partner Network Section - Contains SEO Backlinks */}
+        <section className="bg-[#16213e] py-16">
+          <div className="max-w-6xl mx-auto px-4 text-center">
+            <h2 className="text-3xl font-bold text-white mb-4">Trusted Shopping Network</h2>
+            <p className="text-white/70 mb-8 max-w-2xl mx-auto">
+              Part of the largest Chinese shopping agent network. Access products across multiple verified platforms.
+            </p>
+            <div className="flex flex-wrap justify-center gap-6">
+              <a href="https://oopbuysheet.com" target="_blank" rel="noopener" className="px-6 py-3 bg-white/10 backdrop-blur rounded-xl text-white/80 hover:text-white hover:bg-white/20 transition-all text-sm font-medium">
+                OopBuy Sheet
+              </a>
+              <a href="https://oopbuyspreadsheet.com" target="_blank" rel="noopener" className="px-6 py-3 bg-white/10 backdrop-blur rounded-xl text-white/80 hover:text-white hover:bg-white/20 transition-all text-sm font-medium">
+                OopBuy Spreadsheet
+              </a>
+              <a href="https://orientdigfinds.com" target="_blank" rel="noopener" className="px-6 py-3 bg-white/10 backdrop-blur rounded-xl text-white/80 hover:text-white hover:bg-white/20 transition-all text-sm font-medium">
+                Orient Dig Finds
+              </a>
+              <a href="https://kakobuy-spreadsheet.com" target="_blank" rel="noopener" className="px-6 py-3 bg-white/10 backdrop-blur rounded-xl text-white/80 hover:text-white hover:bg-white/20 transition-all text-sm font-medium">
+                KakoBuy Spreadsheet
+              </a>
+              <a href="https://cnfansportal.com" target="_blank" rel="noopener" className="px-6 py-3 bg-white/10 backdrop-blur rounded-xl text-white/80 hover:text-white hover:bg-white/20 transition-all text-sm font-medium">
+                CNFans Portal
               </a>
             </div>
+          </div>
+        </section>
 
-            {/* Footer Links */}
-            <div className="border-t border-gray-200 pt-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-3">Shop</h3>
-                  <ul className="space-y-2 text-sm text-gray-600">
-                    <li><a href="/" className="hover:text-[#C92910] transition-colors">All Products</a></li>
-                    <li><a href="/?category=fashion" className="hover:text-[#C92910] transition-colors">Fashion</a></li>
-                    <li><a href="/?category=electronics" className="hover:text-[#C92910] transition-colors">Electronics</a></li>
-                    <li><a href="/?category=home" className="hover:text-[#C92910] transition-colors">Home & Living</a></li>
-                  </ul>
+        {/* Footer */}
+        <footer className="bg-[#0f172a] text-white">
+          <div className="max-w-7xl mx-auto px-4 py-16">
+            {/* Main Footer Content */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+              <div className="col-span-2 md:col-span-1">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#3B82F6] to-[#e94560] flex items-center justify-center">
+                    <Package className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <span className="text-xl font-black">HipoBuy</span>
+                    <span className="text-xs text-gray-400 block">Spreadsheet</span>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-3">Learn</h3>
-                  <ul className="space-y-2 text-sm text-gray-600">
-                    <li><a href="/blog" className="hover:text-[#C92910] transition-colors">Shopping Guides</a></li>
-                    <li><a href="/blog/complete-guide-buying-from-taobao-2025" className="hover:text-[#C92910] transition-colors">How to Use Taobao</a></li>
-                    <li><a href="/blog/1688-vs-taobao-vs-weidian-comparison-guide" className="hover:text-[#C92910] transition-colors">Platform Comparison</a></li>
-                    <li><a href="/blog/how-to-avoid-counterfeit-products-chinese-shopping" className="hover:text-[#C92910] transition-colors">Avoid Counterfeits</a></li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-3">CNFans</h3>
-                  <ul className="space-y-2 text-sm text-gray-600">
-                    <li><a href="https://cnfans.com" target="_blank" rel="noopener" className="hover:text-[#C92910] transition-colors">Official Site</a></li>
-                    <li><a href="https://cnfans.com/register?ref=137664" target="_blank" rel="noopener" className="hover:text-[#C92910] transition-colors">Sign Up</a></li>
-                    <li><a href="https://cnfans.com/help" target="_blank" rel="noopener" className="hover:text-[#C92910] transition-colors">Help Center</a></li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-3">Connect</h3>
-                  <ul className="space-y-2 text-sm text-gray-600">
-                    <li><a href="https://cnfans.com/contact" target="_blank" rel="noopener" className="hover:text-[#C92910] transition-colors">Contact Support</a></li>
-                    <li><span className="text-gray-400">24/7 Available</span></li>
-                  </ul>
-                </div>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  The ultimate HipoBuy spreadsheet for Chinese product shopping. Verified deals from Taobao, 1688, and Weidian.
+                </p>
               </div>
 
-              {/* Copyright */}
-              <div className="text-center text-sm text-gray-500 pt-8 border-t border-gray-200">
-                <p>© {new Date().getFullYear()} CNFans Spreadsheet. Curated products from Chinese shopping platforms.</p>
-                <p className="mt-1">Taobao, 1688, and Weidian are trademarks of their respective owners.</p>
+              <div>
+                <h3 className="font-bold mb-4 text-white">Shop</h3>
+                <ul className="space-y-2 text-sm text-gray-400">
+                  <li><a href="/" className="hover:text-[#e94560] transition-colors">All Products</a></li>
+                  <li><a href="/?category=Fashion" className="hover:text-[#e94560] transition-colors">Fashion</a></li>
+                  <li><a href="/?category=Electronics" className="hover:text-[#e94560] transition-colors">Electronics</a></li>
+                  <li><a href="/?category=Home" className="hover:text-[#e94560] transition-colors">Home & Living</a></li>
+                </ul>
               </div>
+
+              <div>
+                <h3 className="font-bold mb-4 text-white">Resources</h3>
+                <ul className="space-y-2 text-sm text-gray-400">
+                  <li><a href="/blog" className="hover:text-[#e94560] transition-colors">Shopping Guides</a></li>
+                  <li><a href="/blog/complete-guide-buying-from-taobao-2025" className="hover:text-[#e94560] transition-colors">Taobao Guide</a></li>
+                  <li><a href="/blog/1688-vs-taobao-vs-weidian-comparison-guide" className="hover:text-[#e94560] transition-colors">Platform Comparison</a></li>
+                  <li><a href="/blog/how-to-avoid-counterfeit-products-chinese-shopping" className="hover:text-[#e94560] transition-colors">Safety Tips</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="font-bold mb-4 text-white">HipoBuy</h3>
+                <ul className="space-y-2 text-sm text-gray-400">
+                  <li><a href="https://hipobuy.com" target="_blank" rel="noopener" className="hover:text-[#e94560] transition-colors">Official Site</a></li>
+                  <li><a href="https://hipobuy.com/register?inviteCode=LKG2UDAUS" target="_blank" rel="noopener" className="hover:text-[#e94560] transition-colors">Sign Up</a></li>
+                  <li><a href="https://hipobuy.com/help" target="_blank" rel="noopener" className="hover:text-[#e94560] transition-colors">Help Center</a></li>
+                </ul>
+              </div>
+            </div>
+
+            {/* SEO Footer Links */}
+            <div className="border-t border-gray-800 pt-8 mb-8">
+              <div className="flex flex-wrap justify-center gap-4 text-xs text-gray-500">
+                <span>Partner Network:</span>
+                <a href="https://oopbuysheet.com" target="_blank" rel="noopener" className="hover:text-[#3B82F6] transition-colors">OopBuy Sheet</a>
+                <a href="https://oopbuyspreadsheet.com" target="_blank" rel="noopener" className="hover:text-[#3B82F6] transition-colors">OopBuy Spreadsheet</a>
+                <a href="https://orientdigfinds.com" target="_blank" rel="noopener" className="hover:text-[#3B82F6] transition-colors">Orient Dig Finds</a>
+                <a href="https://kakobuy-spreadsheet.com" target="_blank" rel="noopener" className="hover:text-[#3B82F6] transition-colors">KakoBuy Spreadsheet</a>
+                <a href="https://cnfansportal.com" target="_blank" rel="noopener" className="hover:text-[#3B82F6] transition-colors">CNFans Portal</a>
+              </div>
+            </div>
+
+            {/* Copyright */}
+            <div className="text-center text-sm text-gray-500 border-t border-gray-800 pt-8">
+              <p>&copy; {new Date().getFullYear()} HipoBuy Spreadsheet. The best Chinese shopping product database.</p>
+              <p className="mt-2 text-xs">
+                Taobao, 1688, and Weidian are trademarks of their respective owners.
+                HipoBuy Spreadsheet is not affiliated with Alibaba Group.
+              </p>
             </div>
           </div>
         </footer>
@@ -437,15 +482,15 @@ export default async function Home({ searchParams }) {
       {/* Signup Modal */}
       <SignupModal />
 
-      {/* Floating Signup Button */}
+      {/* Floating CTA Button */}
       <a
-        href="https://cnfans.com/register?ref=137664"
+        href="https://hipobuy.com/register?inviteCode=LKG2UDAUS"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 px-6 py-4 bg-gradient-to-r from-[#C92910] to-red-700 text-white rounded-full hover:shadow-2xl hover:scale-110 transition-all duration-300 font-bold text-sm sm:text-base shadow-xl animate-bounce hover:animate-none"
+        className="fixed bottom-6 right-6 z-50 btn-primary px-6 py-4 text-white rounded-2xl font-bold shadow-2xl inline-flex items-center gap-2 hover:scale-110 transition-transform"
       >
         <Sparkles className="w-5 h-5" />
-        <span className="hidden sm:inline">Sign Up!</span>
+        <span className="hidden sm:inline">Sign Up Free</span>
       </a>
     </div>
   );

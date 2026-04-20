@@ -66,7 +66,7 @@ export default function SignupModal() {
       <div className="fixed inset-0 z-[101] flex items-center justify-center p-4 animate-slideUp">
         <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-6 sm:p-8 relative overflow-hidden">
           {/* Decorative gradient background */}
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-br from-[#C92910]/20 via-pink-200 to-purple-200 -z-10" />
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-br from-[#3B82F6]/20 via-pink-200 to-blue-200 -z-10" />
 
           {/* Close button */}
           <button
@@ -80,13 +80,13 @@ export default function SignupModal() {
           <div className="relative">
             {/* Icon */}
             <div className="flex justify-center mb-4">
-              <div className="w-20 h-20 bg-gradient-to-br from-[#C92910] to-red-700 rounded-full flex items-center justify-center shadow-lg animate-bounce">
+              <div className="w-20 h-20 bg-gradient-to-br from-[#3B82F6] to-red-700 rounded-full flex items-center justify-center shadow-lg animate-bounce">
                 <Gift className="w-10 h-10 text-white" />
               </div>
             </div>
 
             {/* Heading */}
-            <h2 className="text-2xl sm:text-3xl font-black text-center mb-2 bg-gradient-to-r from-[#C92910] to-purple-600 bg-clip-text text-transparent">
+            <h2 className="text-2xl sm:text-3xl font-black text-center mb-2 bg-gradient-to-r from-[#3B82F6] to-blue-500 bg-clip-text text-transparent">
               Get Exclusive Coupons!
             </h2>
             <p className="text-center text-gray-600 mb-6">
@@ -96,8 +96,8 @@ export default function SignupModal() {
             {/* Benefits */}
             <div className="space-y-3 mb-6">
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#C92910]/10 flex items-center justify-center flex-shrink-0">
-                  <Percent className="w-5 h-5 text-[#C92910]" />
+                <div className="w-10 h-10 rounded-full bg-[#3B82F6]/10 flex items-center justify-center flex-shrink-0">
+                  <Percent className="w-5 h-5 text-[#3B82F6]" />
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900">Instant Coupon Codes</h3>
@@ -106,8 +106,8 @@ export default function SignupModal() {
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
-                  <TrendingDown className="w-5 h-5 text-purple-600" />
+                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                  <TrendingDown className="w-5 h-5 text-blue-500" />
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900">Lower Prices</h3>
@@ -121,17 +121,17 @@ export default function SignupModal() {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900">Safe & Trusted</h3>
-                  <p className="text-sm text-gray-600">Shop with confidence on CNFans's secure platform</p>
+                  <p className="text-sm text-gray-600">Shop with confidence on HipoBuy's secure platform</p>
                 </div>
               </div>
             </div>
 
             {/* CTA Button */}
             <a
-              href="https://cnfans.com/register?ref=137664"
+              href="https://hipobuy.com/register?inviteCode=LKG2UDAUS"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#C92910] via-red-700 to-purple-600 text-white rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-bold text-lg mb-3"
+              className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#3B82F6] via-red-700 to-blue-500 text-white rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-bold text-lg mb-3"
               onClick={handleClose}
             >
               <Sparkles className="w-6 h-6" />
