@@ -10,7 +10,7 @@ set -e  # Exit on error
 # --------------------------
 # Configuration
 # --------------------------
-SSH_KEY="/Users/asiger/Desktop/RootKey"
+SSH_KEY="/Users/jamie/Desktop/All Websites/RootKey"
 SERVER_IP="217.154.115.9"
 DOMAIN="hipobuyspreadsheet.com"
 REMOTE_DIR="/var/www/hipobuyspreadsheet.com"

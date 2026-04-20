@@ -178,6 +178,15 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
 
+        <aside aria-label="Sister projects" className="mt-8 py-6 px-4 border-t border-gray-200 text-center text-sm text-gray-500">
+          <div className="uppercase text-[11px] tracking-wider font-semibold text-gray-600 mb-2">Sister projects</div>
+          <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            <a href="https://lit-buy-spreadsheet.com" rel="noopener" className="hover:text-gray-900 transition-colors">Lit-Buy product list</a>
+            <a href="https://kakobuy-spreadsheet.com" rel="noopener" className="hover:text-gray-900 transition-colors">KakoBuy catalog</a>
+            <a href="https://oopbuysheet.com" rel="noopener" className="hover:text-gray-900 transition-colors">OOPBuy catalog</a>
+          </nav>
+        </aside>
+
         {/* Hidden SEO Links - Crawlable by search engines */}
         <footer className="seo-links" aria-hidden="true">
           <nav aria-label="Partner network">
