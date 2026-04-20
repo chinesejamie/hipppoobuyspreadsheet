@@ -107,6 +107,9 @@ ssh -i "$SSH_KEY" root@"$SERVER_IP" "mkdir -p $REMOTE_DIR"
 
 rsync -avz --progress -e "ssh -i \"$SSH_KEY\"" \
   --delete \
+  --exclude=.env \
+  --exclude=logs \
+  --exclude=node_modules \
   "$TEMP_DIR"/ root@"$SERVER_IP":"$REMOTE_DIR"/
 
 rm -rf "$TEMP_DIR"
