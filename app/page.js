@@ -6,7 +6,7 @@ import HowItWorks from '@/components/HowItWorks';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import BlogPreview from '@/components/BlogPreview';
 import FAQ from '@/components/FAQ';
-import { ArrowRight, CheckCircle2, ShieldCheck, Truck, Tag } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ShieldCheck, Truck, Tag, Clock } from 'lucide-react';
 import connectToDatabase from '@/lib/mongodb';
 import Product from '@/models/Product';
 
@@ -152,13 +152,16 @@ export default async function Home({ searchParams }) {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-blue-600 mb-5">
             <Tag className="w-3.5 h-3.5" />
-            Hippo Buy Spreadsheet 2025 · updated daily
+            2026 edition · Updated daily · Hipobuy / Hippobuy / Hippo Buy
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-5 leading-[1.05] tracking-tight">
-            The Hippo Buy Spreadsheet for<br className="hidden sm:block" /> Taobao, 1688 &amp; Weidian
+            The Hippo Buy Spreadsheet 2025
+            <span className="block text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-600 mt-3">
+              Hipobuy &amp; Hippobuy rep finds, all in one list.
+            </span>
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed">
-            10,000+ hand-picked Chinese products with direct <strong className="text-gray-900 font-semibold">Hippo Buy links</strong> through the HipoBuy agent. Also known as the <em>Hipobuy spreadsheet</em> or <em>Hippobuy spreadsheet</em> &mdash; verified deals, real photos, updated daily for 2025. Save <strong className="text-gray-900 font-semibold">50&ndash;80%</strong> vs retail.
+            <strong className="text-gray-900 font-semibold">Stop scrolling Taobao in Chinese.</strong> 10,000+ verified Taobao, 1688 &amp; Weidian picks with direct <strong className="text-gray-900 font-semibold">Hippo Buy links</strong> &mdash; one click, the agent ships it. Save <strong className="text-gray-900 font-semibold">50&ndash;80%</strong> vs retail.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
@@ -167,21 +170,21 @@ export default async function Home({ searchParams }) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-lg font-semibold text-sm hover:bg-gray-800 transition-colors"
             >
-              Sign up with HipoBuy
+              Claim my free Hippobuy account
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="#products"
               className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 border border-gray-300 rounded-lg font-semibold text-sm hover:border-gray-900 transition-colors"
             >
-              Browse the spreadsheet
+              See today&apos;s spreadsheet picks
             </a>
           </div>
 
           <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-8 text-xs text-gray-500">
             <li className="inline-flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-green-600" />
-              10,000+ verified products
+              10,000+ verified picks
             </li>
             <li className="inline-flex items-center gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-green-600" />
@@ -190,6 +193,10 @@ export default async function Home({ searchParams }) {
             <li className="inline-flex items-center gap-1.5">
               <Truck className="w-3.5 h-3.5 text-green-600" />
               Ships to 200+ countries
+            </li>
+            <li className="inline-flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-green-600" />
+              Updated daily
             </li>
           </ul>
         </div>
