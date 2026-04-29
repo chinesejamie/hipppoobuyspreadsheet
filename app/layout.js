@@ -58,12 +58,22 @@ export const metadata = {
     siteName: "Hippo Buy Spreadsheet",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og.webp",
+        width: 1200,
+        height: 630,
+        alt: "Hippobuy Spreadsheet — Hippo Buy / Hipobuy logo",
+        type: "image/webp",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Hippo Buy Spreadsheet — Hipobuy / Hippobuy Taobao, 1688 & Weidian deals",
     description:
       "10,000+ verified Chinese products with direct Hippo Buy links. Updated daily. Save 50–80%.",
+    images: ["/og.webp"],
   },
   robots: {
     index: true,
