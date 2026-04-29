@@ -8,8 +8,12 @@ export default function FAQ() {
 
   const faqs = [
     {
-      question: "What is HipoBuy and how does it work?",
-      answer: "HipoBuy is a trusted shopping agent that helps you purchase products from Chinese e-commerce platforms like Taobao, 1688, and Weidian. We handle the entire purchasing process, including ordering, quality inspection, and international shipping to your doorstep. Simply find products on our HipoBuy spreadsheet, click the buy button, and we'll take care of the rest."
+      question: "What is Hippo Buy (Hipobuy / Hippobuy) and how does it work?",
+      answer: "Hippo Buy — also written as Hipobuy or Hippobuy — is a trusted Chinese shopping agent that helps you purchase products from Taobao, 1688, and Weidian. The agent handles the entire purchasing process: ordering, quality inspection, and international shipping to your doorstep. Find products on the Hippo Buy spreadsheet, click the buy button, and the rest is taken care of."
+    },
+    {
+      question: "Hipobuy vs Hippobuy vs Hippo Buy — which spelling is correct?",
+      answer: "All three refer to the same shopping agent at hipobuy.com. The official brand spelling is HipoBuy (one P), but Hippobuy (two Ps) and Hippo Buy (two words) are extremely common spellings shoppers use when searching. The Hippo Buy Spreadsheet on this site covers all variants — you'll land on the same catalog regardless of how you typed it."
     },
     {
       question: "How much can I save shopping through Chinese platforms?",
@@ -52,8 +56,12 @@ export default function FAQ() {
       answer: "You can buy almost anything: clothing, shoes, accessories, electronics, home goods, beauty products, toys, sports equipment, and more. Some restricted items (weapons, hazardous materials, counterfeit goods) cannot be shipped internationally. HipoBuy will notify you if any items in your order are restricted."
     },
     {
-      question: "How does HipoBuy Spreadsheet help me find products?",
-      answer: "Our curated HipoBuy spreadsheet features thousands of verified products with direct links, accurate descriptions, real images, and price comparisons. We organize products by category, making it easy to discover deals. Each product links directly to HipoBuy's platform where you can complete your purchase with your invite code for extra savings."
+      question: "How does the Hippo Buy Spreadsheet help me find products?",
+      answer: "The curated Hippo Buy spreadsheet (also called the Hipobuy spreadsheet or Hippobuy spreadsheet) features thousands of verified products with direct Hippo Buy links, accurate descriptions, real images, and price comparisons. Products are organized by category so deals are easy to discover. Each product links directly to HipoBuy where you can complete your purchase with your invite code for extra savings."
+    },
+    {
+      question: "Where do I find the Hippo Buy Spreadsheet 2025 edition?",
+      answer: "You're already on it. hippoobuyspreadsheet.com is the Hippo Buy Spreadsheet 2025 — refreshed daily with new Taobao, 1688, and Weidian rep finds and verified Hippo Buy links."
     }
   ];
 

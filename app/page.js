@@ -14,9 +14,9 @@ export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
 
 export const metadata = {
-  title: 'HipoBuy Spreadsheet — 10,000+ Taobao, 1688 & Weidian Deals',
+  title: 'Hippo Buy Spreadsheet 2025 — Hipobuy & Hippobuy Taobao, 1688 & Weidian Deals',
   description:
-    'The HipoBuy Spreadsheet: 10,000+ curated Taobao, 1688 & Weidian products with direct buy links, verified deals, and daily updates. Save 50–80% on authentic Chinese shopping.',
+    'The Hippo Buy Spreadsheet (Hipobuy / Hippobuy): 10,000+ curated Taobao, 1688 & Weidian products with direct Hippo Buy links, verified deals, and daily 2025 updates. Save 50–80% on authentic Chinese shopping.',
   alternates: { canonical: 'https://hippoobuyspreadsheet.com' },
 };
 
@@ -146,63 +146,19 @@ export default async function Home({ searchParams }) {
   const search = resolvedParams.search || '';
   const category = resolvedParams.category || 'all';
 
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'What is the HipoBuy Spreadsheet?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'The HipoBuy Spreadsheet is a curated product database of 10,000+ verified Taobao, 1688, and Weidian items with direct buy links through the HipoBuy shopping agent. It is updated daily with the best rep-finds and wholesale deals.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'How do I buy products listed on the HipoBuy Spreadsheet?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Click any product on the spreadsheet, review the photos and price, then use the direct HipoBuy buy link. HipoBuy places the order with the Chinese seller, quality-checks the item, and ships it to you worldwide.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'How much can I save using the HipoBuy Spreadsheet?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Most products in the HipoBuy Spreadsheet are 50–80% cheaper than Western retail, because you buy direct from Taobao, 1688, and Weidian sellers via an agent.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Is the HipoBuy Spreadsheet safe?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Yes. Every order is handled by the HipoBuy agent with buyer protection and a quality-check step before shipping, so you never pay directly to an unknown Taobao seller.',
-        },
-      },
-    ],
-  };
-
   return (
     <main className="min-h-screen bg-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
       <section className="pt-24 pb-16 sm:pt-28 sm:pb-20 border-b border-gray-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-blue-600 mb-5">
             <Tag className="w-3.5 h-3.5" />
-            HipoBuy Spreadsheet · updated daily
+            Hippo Buy Spreadsheet 2025 · updated daily
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-5 leading-[1.05] tracking-tight">
-            The HipoBuy Spreadsheet for<br className="hidden sm:block" /> Taobao, 1688 &amp; Weidian
+            The Hippo Buy Spreadsheet for<br className="hidden sm:block" /> Taobao, 1688 &amp; Weidian
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed">
-            10,000+ hand-picked Chinese products with direct buy links through the HipoBuy agent. Verified deals, real photos, updated daily. Save <strong className="text-gray-900 font-semibold">50–80%</strong> vs retail.
+            10,000+ hand-picked Chinese products with direct <strong className="text-gray-900 font-semibold">Hippo Buy links</strong> through the HipoBuy agent. Also known as the <em>Hipobuy spreadsheet</em> or <em>Hippobuy spreadsheet</em> &mdash; verified deals, real photos, updated daily for 2025. Save <strong className="text-gray-900 font-semibold">50&ndash;80%</strong> vs retail.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
@@ -244,21 +200,28 @@ export default async function Home({ searchParams }) {
           <div className="text-center mb-10">
             <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-gray-500">About</span>
             <h2 id="what-is" className="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 tracking-tight">
-              What is the HipoBuy Spreadsheet?
+              What is the Hippo Buy Spreadsheet?
             </h2>
           </div>
           <div className="prose prose-gray max-w-none text-gray-700 leading-relaxed">
             <p>
-              The <strong>HipoBuy Spreadsheet</strong> is a curated product database covering the best finds from
-              <strong> Taobao</strong>, <strong>1688</strong>, and <strong>Weidian</strong> &mdash; three of China&apos;s largest e-commerce platforms.
-              Instead of scrolling through millions of listings in Chinese, the HipoBuy Spreadsheet gives you
-              a clean, searchable catalog with photos, prices, seller info, and direct purchase links.
+              The <strong>Hippo Buy Spreadsheet</strong> &mdash; also called the <strong>Hipobuy spreadsheet</strong> or
+              <strong> Hippobuy spreadsheet</strong> &mdash; is a curated product database covering the best finds from
+              <strong> Taobao</strong>, <strong>1688</strong>, and <strong>Weidian</strong>, three of China&apos;s largest
+              e-commerce platforms. Instead of scrolling through millions of listings in Chinese, the Hippo Buy
+              spreadsheet gives you a clean, searchable catalog with photos, prices, seller info, and direct
+              <strong> Hippo Buy links</strong>.
             </p>
             <p>
-              Every listing is reviewed and buyable in one click through the <strong>HipoBuy shopping agent</strong>, which
-              places the order, runs a quality-check on the item, and ships it to your country with tracking. It&apos;s the
-              fastest way for rep-shoppers, fashion buyers, and wholesalers outside of China to access the same catalogs that
-              Chinese buyers use &mdash; at 50&ndash;80% less than Western retail.
+              Every listing is reviewed and buyable in one click through the <strong>HipoBuy shopping agent</strong> (hipobuy.com),
+              which places the order, runs a quality-check on the item, and ships it to your country with tracking. It&apos;s
+              the fastest way for rep-shoppers, fashion buyers, and wholesalers outside of China to access the same
+              catalogs Chinese buyers use &mdash; at 50&ndash;80% less than Western retail.
+            </p>
+            <p className="text-sm text-gray-500">
+              <strong>Spelling note:</strong> the official brand is <em>HipoBuy</em> (one P), but shoppers also search
+              for it as <em>Hippobuy</em>, <em>Hippo Buy</em>, <em>Hipobuy spreadsheets</em>, or even
+              <em> hippobuy spreedsheet</em>. They all point to the same agent and the same catalog you see here.
             </p>
           </div>
         </div>
@@ -269,7 +232,7 @@ export default async function Home({ searchParams }) {
           <div className="mb-8 text-center">
             <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-gray-500">Catalog</span>
             <h2 id="catalog" className="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 tracking-tight">
-              Browse the HipoBuy Spreadsheet
+              Browse the Hippo Buy Spreadsheet
             </h2>
             <p className="text-gray-600 mt-3 max-w-2xl mx-auto">
               {products.length > 0
@@ -314,9 +277,9 @@ export default async function Home({ searchParams }) {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
             <div className="col-span-2 md:col-span-1">
-              <div className="font-bold text-white text-lg mb-2">HipoBuy Spreadsheet</div>
+              <div className="font-bold text-white text-lg mb-2">Hippo Buy Spreadsheet</div>
               <p className="text-sm text-gray-400 leading-relaxed">
-                The curated HipoBuy Spreadsheet for Taobao, 1688, and Weidian. Verified products, direct buy links, updated daily.
+                The curated Hippo Buy Spreadsheet (Hipobuy / Hippobuy) for Taobao, 1688, and Weidian. Verified products, direct Hippo Buy links, updated daily.
               </p>
             </div>
             <div>
@@ -348,7 +311,7 @@ export default async function Home({ searchParams }) {
           </div>
 
           <div className="border-t border-gray-800 pt-6 text-center text-xs text-gray-500">
-            <p>&copy; {new Date().getFullYear()} HipoBuy Spreadsheet &mdash; Curated Taobao, 1688 &amp; Weidian finds.</p>
+            <p>&copy; {new Date().getFullYear()} Hippo Buy Spreadsheet (Hipobuy &middot; Hippobuy) &mdash; Curated Taobao, 1688 &amp; Weidian finds.</p>
             <p className="mt-1.5 text-gray-600">
               Taobao, 1688, and Weidian are trademarks of their respective owners. Not affiliated with Alibaba Group.
             </p>

@@ -17,13 +17,23 @@ const SITE_URL = "https://hippoobuyspreadsheet.com";
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "HipoBuy Spreadsheet — 10,000+ Taobao, 1688 & Weidian Deals",
-    template: "%s | HipoBuy Spreadsheet",
+    default: "Hippo Buy Spreadsheet — Hipobuy & Hippobuy Taobao, 1688 & Weidian Deals 2025",
+    template: "%s | Hippo Buy Spreadsheet",
   },
   description:
-    "The HipoBuy Spreadsheet: 10,000+ curated Taobao, 1688 & Weidian products with direct buy links, verified deals, and daily updates. Save 50–80% on authentic Chinese products.",
+    "The Hippo Buy Spreadsheet (also known as Hipobuy spreadsheet or Hippobuy spreadsheet): 10,000+ curated Taobao, 1688 & Weidian products with direct Hippo Buy links, verified deals, and daily updates for 2025. Save 50–80% on authentic Chinese products.",
   keywords: [
+    "hippo buy spreadsheet",
     "hipobuy spreadsheet",
+    "hippobuy spreadsheet",
+    "hippo buy spreadsheet 2025",
+    "spreadsheet hippo buy",
+    "spreadsheet hipobuy",
+    "hipobuy spreadsheets",
+    "hippobuy spreadsheets",
+    "hippo buy links",
+    "hipobuy",
+    "hippobuy",
     "hipobuy product spreadsheet",
     "chinese shopping spreadsheet",
     "taobao spreadsheet",
@@ -41,19 +51,19 @@ export const metadata = {
     canonical: SITE_URL,
   },
   openGraph: {
-    title: "HipoBuy Spreadsheet — Taobao, 1688 & Weidian deals",
+    title: "Hippo Buy Spreadsheet — Hipobuy & Hippobuy Taobao, 1688 & Weidian deals",
     description:
-      "10,000+ verified Chinese products with direct buy links. Updated daily. Save 50–80% with the HipoBuy Spreadsheet.",
+      "10,000+ verified Chinese products with direct Hippo Buy links. Updated daily for 2025. Save 50–80% with the Hippo Buy Spreadsheet (Hipobuy / Hippobuy).",
     url: SITE_URL,
-    siteName: "HipoBuy Spreadsheet",
+    siteName: "Hippo Buy Spreadsheet",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "HipoBuy Spreadsheet — Taobao, 1688 & Weidian deals",
+    title: "Hippo Buy Spreadsheet — Hipobuy / Hippobuy Taobao, 1688 & Weidian deals",
     description:
-      "10,000+ verified Chinese products with direct buy links. Updated daily. Save 50–80%.",
+      "10,000+ verified Chinese products with direct Hippo Buy links. Updated daily. Save 50–80%.",
   },
   robots: {
     index: true,
@@ -72,14 +82,22 @@ export default function RootLayout({ children }) {
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "HipoBuy Spreadsheet",
+    name: "Hippo Buy Spreadsheet",
     alternateName: [
-      "HipoBuy Product Spreadsheet",
-      "HipoBuy Database",
-      "HipoBuy Taobao Spreadsheet",
+      "HipoBuy Spreadsheet",
+      "Hipobuy Spreadsheet",
+      "Hippobuy Spreadsheet",
+      "Hippo Buy Product Spreadsheet",
+      "Hipobuy Product Spreadsheet",
+      "Hippobuy Product Spreadsheet",
+      "Hippo Buy Database",
+      "Hipobuy Database",
+      "Hippo Buy Taobao Spreadsheet",
+      "Hipobuy Spreadsheets",
+      "Hippobuy Spreadsheets",
     ],
     description:
-      "The HipoBuy Spreadsheet with 10,000+ curated Taobao, 1688, and Weidian products. Save 50–80% on authentic Chinese shopping.",
+      "The Hippo Buy Spreadsheet (also known as Hipobuy or Hippobuy spreadsheet) with 10,000+ curated Taobao, 1688, and Weidian products. Save 50–80% on authentic Chinese shopping.",
     url: SITE_URL,
     potentialAction: {
       "@type": "SearchAction",
@@ -91,10 +109,11 @@ export default function RootLayout({ children }) {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "HipoBuy Spreadsheet",
+    name: "Hippo Buy Spreadsheet",
+    alternateName: ["HipoBuy Spreadsheet", "Hipobuy Spreadsheet", "Hippobuy Spreadsheet"],
     url: SITE_URL,
     description:
-      "Curated HipoBuy Spreadsheet covering Taobao, 1688, and Weidian with direct buy links and verified deals.",
+      "Curated Hippo Buy Spreadsheet (Hipobuy / Hippobuy) covering Taobao, 1688, and Weidian with direct Hippo Buy links and verified deals.",
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
