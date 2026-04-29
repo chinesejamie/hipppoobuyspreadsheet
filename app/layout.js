@@ -99,6 +99,7 @@ export default function RootLayout({ children }) {
     description:
       "The Hippo Buy Spreadsheet (also known as Hipobuy or Hippobuy spreadsheet) with 10,000+ curated Taobao, 1688, and Weidian products. Save 50–80% on authentic Chinese shopping.",
     url: SITE_URL,
+    dateModified: new Date().toISOString().slice(0, 10),
     potentialAction: {
       "@type": "SearchAction",
       target: `${SITE_URL}/?search={search_term_string}`,

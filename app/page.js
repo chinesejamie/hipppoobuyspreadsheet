@@ -273,6 +273,98 @@ export default async function Home({ searchParams }) {
         <FAQ />
       </div>
 
+      <section
+        aria-labelledby="changelog"
+        className="py-16 sm:py-20 bg-gray-50 border-t border-gray-100"
+      >
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-gray-500">
+              Update log
+            </span>
+            <h2
+              id="changelog"
+              className="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 tracking-tight"
+            >
+              Hippo Buy Spreadsheet — version history
+            </h2>
+            <p className="text-gray-600 mt-3">
+              What&apos;s new in the Hipobuy / Hippobuy catalog. Last refresh: <strong>April 29, 2026</strong>.
+            </p>
+          </div>
+
+          <ol className="relative border-l border-gray-200 ml-2">
+            {[
+              {
+                date: '2026-04-29',
+                label: 'April 29, 2026',
+                title: 'Spelling-variant SEO refresh',
+                body: 'Site copy now covers Hippo Buy, Hippobuy, and Hipobuy spellings together. Added a 2025-edition FAQ entry and a dedicated spelling Q&A so shoppers searching any variant land on the same catalog.',
+              },
+              {
+                date: '2026-04-21',
+                label: 'April 21, 2026',
+                title: 'Catalog refresh — spring footwear',
+                body: 'Added 380+ new spring/summer footwear listings from Taobao top sellers (sneakers, running, sandals). Refreshed pricing on the 1688 wholesale section.',
+              },
+              {
+                date: '2026-04-12',
+                label: 'April 12, 2026',
+                title: 'Weidian streetwear drop',
+                body: 'Imported 220+ Weidian streetwear and accessories listings, including newly verified sellers for hoodies, tees, and bags.',
+              },
+              {
+                date: '2026-03-28',
+                label: 'March 28, 2026',
+                title: 'Sister-site backlinks + footer',
+                body: 'Connected the Hippo Buy Spreadsheet to the wider rep-shopper network: Lit-Buy, KakoBuy, and OOPBuy catalogs are now linked from the footer.',
+              },
+              {
+                date: '2026-03-15',
+                label: 'March 15, 2026',
+                title: 'Search & filter overhaul',
+                body: 'Switched to server-rendered search and category filters for faster Hippo Buy spreadsheet browsing on mobile, with category dedup and currency-aware pricing.',
+              },
+              {
+                date: '2026-02-20',
+                label: 'February 20, 2026',
+                title: '1688 wholesale section expanded',
+                body: 'Added 600+ verified 1688 wholesale items (electronics, home goods, accessories) with minimum order quantities surfaced on each card.',
+              },
+              {
+                date: '2026-01-10',
+                label: 'January 10, 2026',
+                title: '2025 → 2026 catalog rollover',
+                body: 'Archived 2024 listings and seeded the 2026 Hippo Buy spreadsheet with the year&apos;s first verified Taobao rep finds and trending fashion drops.',
+              },
+            ].map((entry) => (
+              <li key={entry.date} className="mb-8 ml-4 last:mb-0">
+                <span
+                  aria-hidden="true"
+                  className="absolute -left-1.5 mt-1.5 w-3 h-3 bg-blue-600 rounded-full border-2 border-white"
+                />
+                <time
+                  dateTime={entry.date}
+                  className="block text-xs font-semibold uppercase tracking-wider text-blue-600"
+                >
+                  {entry.label}
+                </time>
+                <h3 className="text-base font-semibold text-gray-900 mt-1">
+                  {entry.title}
+                </h3>
+                <p className="text-sm text-gray-600 mt-1 leading-relaxed">
+                  {entry.body}
+                </p>
+              </li>
+            ))}
+          </ol>
+
+          <p className="text-center text-xs text-gray-500 mt-8">
+            The Hippo Buy Spreadsheet is updated daily. Major changes are logged here; minor product additions happen continuously.
+          </p>
+        </div>
+      </section>
+
       <footer className="bg-gray-950 text-gray-300 border-t border-gray-800">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
