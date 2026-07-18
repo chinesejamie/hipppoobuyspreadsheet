@@ -34,10 +34,10 @@ const nextConfig = {
   },
   async rewrites() {
     return [
-      { source: '/uploads/:path*', destination: 'http://localhost:4501/uploads/:path*' },
-      { source: '/assets/profilePicture/:path*', destination: 'http://localhost:4200/assets/profilePicture/:path*' },
-      { source: '/assets/productImages/:path*', destination: 'http://localhost:4200/assets/productImages/:path*' },
-      { source: '/assets/images/:path*', destination: 'http://localhost:4200/assets/images/:path*' },
+      { source: '/uploads/:path*', destination: 'http://217.154.115.9:4501/uploads/:path*' },
+      { source: '/assets/profilePicture/:path*', destination: 'http://217.154.115.9:4501/assets/profilePicture/:path*' },
+      { source: '/assets/productImages/:path*', destination: 'http://217.154.115.9:4501/assets/productImages/:path*' },
+      { source: '/assets/images/:path*', destination: 'http://217.154.115.9:4501/assets/images/:path*' },
     ];
   },
 };
